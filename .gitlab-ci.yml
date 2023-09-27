@@ -5,6 +5,9 @@ stages:
   - deploy
   - prepare
 
+before_script:
+  - docker login -u $CI_REGISTRY_USER -p $CI_REGISTRY_PASSWORD $CI_REGISTRY
+
 build_docker_images:
   stage: prepare
   when: manual
@@ -17,10 +20,8 @@ build_docker_images:
     DOCKER_TLS_CERTDIR: "/certs"
     DOCKER_DRIVER: overlay2
     DOCKER_HOST: "tcp://docker:2376"
-  script:
-    - docker login -u $CI_REGISTRY_USER -p $CI_REGISTRY_PASSWORD $CI_REGISTRY
-    - docker compose build phpcli
-    - docker compose push phpcli $CI_REGISTRY/press/press-crud/phpcli:latest
+    - docker build --pull -t $CI_REGISTRY/press/press-crud/phpcli:latest -f dev/Dockerfile.phpcli .
+    - docker push $CI_REGISTRY/press/press-crud/phpcli:latest
   tags:
     - docker
 
