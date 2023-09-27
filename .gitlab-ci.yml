@@ -20,6 +20,7 @@ build_docker_images:
     DOCKER_TLS_CERTDIR: "/certs"
     DOCKER_DRIVER: overlay2
     DOCKER_HOST: "tcp://docker:2376"
+  script:
     - docker build --pull -t $CI_REGISTRY/press/press-crud/phpcli:latest -f dev/Dockerfile.phpcli .
     - docker push $CI_REGISTRY/press/press-crud/phpcli:latest
   tags:
