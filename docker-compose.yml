@@ -1,0 +1,14 @@
+version: '3.5'
+
+services:
+  ## PHP Cli Dev mode with xDebug, phpunit, phpcs
+  ### Larapress dev environement
+  phpcli:
+    build:
+      dockerfile: dev/Dockerfile.phpcli
+      context: .
+    network_mode: host # needed by xDebug to connect to VSCode
+    volumes:
+      - ./:/var/www
+    extra_hosts:
+      - "host.docker.internal:host-gateway" # xDebug uses this to connect to VSCode

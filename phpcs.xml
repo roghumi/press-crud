@@ -1,0 +1,31 @@
+<?xml version="1.0"?>
+<ruleset name="Larapress">
+    <description>Larapress Coding style</description>
+
+    <rule ref="PSR12"/>
+    <rule ref="PSR2"/>
+
+    <file>/var/www/src</file>
+
+    <exclude-patterns>/var/www/vendor/*</exclude-patterns>
+    <exclude-patterns>/var/www/tests/*</exclude-patterns>
+    <exclude-patterns>/var/www/lang/*</exclude-patterns>
+    <exclude-patterns>/var/www/routes/*</exclude-patterns>
+    <exclude-patterns>/var/www/database/*</exclude-patterns>
+    <exclude-patterns>/var/www/config/*</exclude-patterns>
+
+
+    <ini name="memory_limit" value="128M"/>
+
+    <arg name="extensions" value="php,inc" />
+    <arg name="report" value="summary"/>
+    <arg name="colors"/>
+    <arg value="sp"/>
+
+    <rule ref="Squiz.Commenting.FunctionComment.Missing"/>
+    <rule ref="Squiz.Commenting.FunctionComment.MissingParamTag"/>
+    <rule ref="Squiz.Commenting.FunctionComment.MissingParamName"/>
+    <rule ref="Squiz.Commenting.FunctionComment.ParamNameNoMatch"/>
+    <rule ref="Squiz.Commenting.FunctionComment.IncorrectTypeHint"/>
+    <rule ref="Squiz.Commenting.FunctionComment.MissingReturn"/>
+</ruleset>
