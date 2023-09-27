@@ -39,8 +39,8 @@ test:
     DOCKER_DRIVER: overlay2
     DOCKER_HOST: "tcp://docker:2376"
   script:
-    - docker compose run $CI_REGISTRY/press/press-crud/phpcli:latest composer install
-    - docker compose run $CI_REGISTRY/press/press-crud/phpcli:latest phpunit
+    - docker compose run $CI_REGISTRY_IMAGE:latest composer install
+    - docker compose run $CI_REGISTRY_IMAGE:latest phpunit
   tags:
     - docker
 
@@ -57,7 +57,25 @@ lint:
     DOCKER_DRIVER: overlay2
     DOCKER_HOST: "tcp://docker:2376"
   script:
-    - docker compose run $CI_REGISTRY/press/press-crud/phpcli:latest composer install
-    - docker compose run $CI_REGISTRY/press/press-crud/phpcli:latest phpcs
+    - docker compose run $CI_REGISTRY_IMAGE:latest composer install
+    - docker compose run $CI_REGISTRY_IMAGE:latest phpcs
+  tags:
+    - docker
+
+push_composer_package_dev:
+  stage: deploy
+  when: manual
+  image: docker:24.0.5
+  services:
+    - docker:24.0.5-dind
+  variables:
+    DOCKER_TLS_VERIFY: 1
+    DOCKER_CERT_PATH: "/certs/client"
+    DOCKER_TLS_CERTDIR: "/certs"
+    DOCKER_DRIVER: overlay2
+    DOCKER_HOST: "tcp://docker:2376"
+  script:
+    - apk add curl
+    - 'curl --header "Job-Token: $CI_JOB_TOKEN" --data tag=dev "${CI_API_V4_URL}/projects/$CI_PROJECT_ID/packages/composer"'
   tags:
     - docker
