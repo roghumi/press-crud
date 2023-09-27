@@ -19,6 +19,6 @@ run_tests:
     DOCKER_DRIVER: overlay2
     DOCKER_HOST: "tcp://docker:2376"
   script:
-    - docker compose run -it phpcli phpunit 
+    - docker compose run phpcli phpunit 
   tags:
     - docker
