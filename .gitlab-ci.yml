@@ -21,7 +21,7 @@ build_docker_images:
     DOCKER_DRIVER: overlay2
     DOCKER_HOST: "tcp://docker:2376"
   script:
-    - docker build --pull -t -t $CI_REGISTRY_IMAGE:latest -f dev/Dockerfile.phpcli .
+    - docker build --pull -t $CI_REGISTRY_IMAGE:latest -f dev/Dockerfile.phpcli .
     - docker push $CI_REGISTRY_IMAGE:latest
   tags:
     - docker
