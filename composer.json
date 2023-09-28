@@ -3,6 +3,7 @@
     "description": "Easy CRUD REST API for Laravel.",
     "type": "library",
     "license": "MIT",
+    "version": "dev-master",
     "autoload": {
         "psr-4": {
             "Roghumi\\Press\\Crud\\": "src/"
