@@ -5,9 +5,6 @@ stages:
   - prepare
   - deploy
 
-before_script:
-  - docker login -u gitlab-ci-token -p $CI_BUILD_TOKEN $CI_REGISTRY
-
 build_docker_images:
   stage: prepare
   when: manual
@@ -21,6 +18,7 @@ build_docker_images:
     DOCKER_DRIVER: overlay2
     DOCKER_HOST: "tcp://docker:2376"
   script:
+    - docker login -u gitlab-ci-token -p $CI_BUILD_TOKEN $CI_REGISTRY
     - docker build --pull -t $CI_REGISTRY_IMAGE:latest -f dev/Dockerfile.phpcli .
     - docker push $CI_REGISTRY_IMAGE:latest
   tags:
@@ -39,6 +37,7 @@ test:
     DOCKER_DRIVER: overlay2
     DOCKER_HOST: "tcp://docker:2376"
   script:
+    - docker login -u gitlab-ci-token -p $CI_BUILD_TOKEN $CI_REGISTRY
     - docker compose run $CI_REGISTRY_IMAGE:latest composer install
     - docker compose run $CI_REGISTRY_IMAGE:latest phpunit
   tags:
@@ -57,6 +56,7 @@ lint:
     DOCKER_DRIVER: overlay2
     DOCKER_HOST: "tcp://docker:2376"
   script:
+    - docker login -u gitlab-ci-token -p $CI_BUILD_TOKEN $CI_REGISTRY
     - docker compose run $CI_REGISTRY_IMAGE:latest composer install
     - docker compose run $CI_REGISTRY_IMAGE:latest phpcs
   tags:
