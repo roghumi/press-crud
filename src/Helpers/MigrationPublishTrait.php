@@ -9,6 +9,10 @@ trait MigrationPublishTrait
 {
     /**
      * Searches migrations and publishes them as assets.
+     *
+     * @param string $directory directory to publish migration files from
+     *
+     * @return void
      */
     protected function publishMigrations(string $directory): void
     {

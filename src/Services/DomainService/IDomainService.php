@@ -13,8 +13,6 @@ interface IDomainService
     /**
      * Add a user to a domain
      *
-     * @param int|string $userId
-     * @param int|string $domainId
      *
      * @return void
      */
@@ -23,8 +21,6 @@ interface IDomainService
     /**
      * Remove a user from a domain
      *
-     * @param int|string $userId
-     * @param int|string $domainId
      *
      * @return void
      */
@@ -33,8 +29,6 @@ interface IDomainService
     /**
      * Connect domains as parent child
      *
-     * @param int|string $parentId
-     * @param int|string $childId
      *
      * @return void
      */
@@ -43,8 +37,6 @@ interface IDomainService
     /**
      * Connect multiple records to a parent as children
      *
-     * @param int|string $parentId
-     * @param array $childIds
      *
      * @return void
      */
@@ -53,7 +45,6 @@ interface IDomainService
     /**
      * Remove domain from parent, and make it a root domain
      *
-     * @param int|string $domainId
      *
      * @return void
      */
@@ -61,36 +52,22 @@ interface IDomainService
 
     /**
      * Get a collection of domain ancestors
-     *
-     * @param int|string $domainId
-     *
-     * @return Collection
      */
     public function getAncestorDomainIds(int|string $domainId): Collection;
 
     /**
      * Get a list of a domains descendants
-     *
-     * @param int|string $domainId
-     *
-     * @return Collection
      */
     public function getChildDomainIds(int|string $domainId): Collection;
 
     /**
      * Get root domain Id for this domain Id
-     *
-     * @param int|string $domainId
-     *
-     * @return int|string
      */
     public function getRootDomainId(int|string $domainId): int|string;
-
 
     /**
      * Get parent of this domain if exists
      *
-     * @param int|string $domainId
      *
      * @return int|string
      */

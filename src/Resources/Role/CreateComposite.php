@@ -14,11 +14,9 @@ class CreateComposite implements ICreateVerbComposite
     /**
      * Rules for this verb on resource
      *
-     * @param Request $request incoming request
-     * @param array $compositeRules Rules from other registered relevant compositions.
-     * @param mixed ...$args route args
-     *
-     * @return array
+     * @param  Request  $request incoming request
+     * @param  array  $compositeRules Rules from other registered relevant compositions.
+     * @param  mixed  ...$args route args
      */
     public function getRules(Request $request, $compositeRules, ...$args): array
     {
@@ -36,11 +34,9 @@ class CreateComposite implements ICreateVerbComposite
     /**
      * Sanitized data from request for eloquent model
      *
-     * @param Request $request incoming request
-     * @param array $data Data from other registered relevant compositions.
-     * @param mixed ...$args route args
-     *
-     * @return array
+     * @param  Request  $request incoming request
+     * @param  array  $data Data from other registered relevant compositions.
+     * @param  mixed  ...$args route args
      */
     public function getSanitized(Request $request, array $data, ...$args): array
     {
@@ -56,13 +52,11 @@ class CreateComposite implements ICreateVerbComposite
      * crud verb composite is used to create a model, now one can
      * Access this model and make necessary changes before model is stored.
      *
-     * @param Request $request incoming request
-     * @param Model $resource model that will be created
-     * @param mixed ...$args incoming route args
+     * @param  Request  $request incoming request
+     * @param  Model  $resource model that will be created
+     * @param  mixed  ...$args incoming route args
      *
      * @throws Exception
-     *
-     * @return void
      */
     public function onBeforeCreate(Request $request, Model $resource, ...$args): void
     {
@@ -73,13 +67,11 @@ class CreateComposite implements ICreateVerbComposite
      * ne can use this composite callback to
      * complete a request relation connections and more.
      *
-     * @param Request $request incoming request
-     * @param Model $resource newly created model
-     * @param mixed ...$args incoming route args
+     * @param  Request  $request incoming request
+     * @param  Model  $resource newly created model
+     * @param  mixed  ...$args incoming route args
      *
      * @throws Exception
-     *
-     * @return void
      */
     public function onAfterCreate(Request $request, Model $resource, ...$args): void
     {

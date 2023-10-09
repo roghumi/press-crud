@@ -27,18 +27,14 @@ trait RBACVerbTrait
      * use $dispatchEvensCallback to call events after successful verb execution,
      * you will receive your resulting object from $executeCallback as a parameter
      *
-     * @param Request $request
-     * @param ICrudResourceProvider $provider
-     * @param callable $executeCallback callback function with
+     * @param  callable  $executeCallback callback function with
      *    signature (array $sanitizedData, array $verbCompositions): any as $execResult
-     * @param callable $dispatchEvensCallback callback function with signature (any $execResult)
-     * @param callable|null $customCompositeCallback callback function with signature (ICrudVerbComposite $composite)
-     * @param bool|callable  $verifyRules boolean or function with
+     * @param  callable  $dispatchEvensCallback callback function with signature (any $execResult)
+     * @param  callable|null  $customCompositeCallback callback function with signature (ICrudVerbComposite $composite)
+     * @param  bool|callable  $verifyRules boolean or function with
      *    signature (ICrudResourceProvider $provider, ICrudVerbComposite[] $verbCompositions, array $compositionRules)
-     * @param bool $useTransactions wrap callbacks in a db transaction call
-     * @param mixed ...$args args from route
-     *
-     * @return mixed
+     * @param  bool  $useTransactions wrap callbacks in a db transaction call
+     * @param  mixed  ...$args args from route
      */
     protected function execRouteWithControl(
         Request $request,
@@ -113,12 +109,6 @@ trait RBACVerbTrait
     /**
      * register a route for this verb and provider
      * combine this method with execRouteWithControl() to achieve safe custom crud actions
-     *
-     * @param ICrudResourceProvider $provider
-     * @param array $methods
-     * @param string $url
-     *
-     * @return Route
      */
     protected function registerRouteWithControl(
         ICrudResourceProvider $provider,
@@ -142,10 +132,9 @@ trait RBACVerbTrait
      * This function acts as controller entry point.
      * Get associated provider for the verb and pass args to get the response.
      *
-     * @param Request $request incoming request.
-     * @param Route $route route registered for this verb.
-     * @param mixed ...$args route args.
-     *
+     * @param  Request  $request incoming request.
+     * @param  Route  $route route registered for this verb.
+     * @param  mixed  ...$args route args.
      * @return JsonResponse
      */
     public function executeVerbFromRoute(Request $request, Route $route, ...$args)

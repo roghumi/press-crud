@@ -16,7 +16,7 @@
     * ``docker compose run -it phpcli phpcbf``
 * Create a pull request
 
-## Development Environment Setup Guid
+## Development environment for VSCode setup guid
 * ``mkdir .vscode``
 * put this as settings.json
 ```
@@ -29,7 +29,15 @@
     "phpcs.executablePath": "dev/phpcs",
     "phpcs.autoConfigSearch": false,
     "phpcs.lintOnType": false,
-    "phpcs.standard": "Larapress"
+    "phpcs.standard": "Larapress",
+    "phpcs.ignorePatterns": [
+        "tests/*",
+        "lang/*",
+        "database/*",
+        "routes/*",
+        "config/*",
+        "vendor/*"
+    ]
 }
 ```
 * put this as launch.json
@@ -49,12 +57,13 @@
     ]
 }
 ```
-* VSCode Extensions to install
-    * PHP Intelephense
-    * Laravel Snippets
-    * Laravel Extra Intellisense
 
-    
+## VSCode Extensions to install
+* PHP Intelephense
+* Laravel Snippets
+* Laravel Extra Intellisense
+
+
 ## Development Environment Info
 * Docker 23.0.3
 * Docker compose 2.17.2

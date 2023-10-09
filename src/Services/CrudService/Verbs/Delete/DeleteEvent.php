@@ -16,10 +16,6 @@ class DeleteEvent implements ShouldQueue
     /**
      * Delete new event instance.
      *
-     * @param string|int $userId
-     * @param string $providerClass
-     * @param string|int $modelId
-     * @param int $timestamp
      *
      * @return DeleteEvent
      */
@@ -32,9 +28,6 @@ class DeleteEvent implements ShouldQueue
         //
     }
 
-    /**
-     * @return ICrudResourceProvider
-     */
     public function getCrudProvider(): ICrudResourceProvider
     {
         $class = $this->providerClass;
@@ -42,9 +35,6 @@ class DeleteEvent implements ShouldQueue
         return new $class();
     }
 
-    /**
-     * @return Model
-     */
     public function getObjectModel(): Model
     {
         return $this

@@ -12,8 +12,6 @@ interface ICrudResource
 {
     /**
      * get eloquent object for this resource item
-     *
-     * @return Model
      */
     public function getModel(): Model;
 }

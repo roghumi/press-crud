@@ -15,8 +15,6 @@ class DomainService implements IDomainService
     /**
      * Add a user to a domain
      *
-     * @param int|string $userId
-     * @param int|string $domainId
      *
      * @return void
      */
@@ -31,8 +29,6 @@ class DomainService implements IDomainService
     /**
      * Remove a user from a domain
      *
-     * @param int|string $userId
-     * @param int|string $domainId
      *
      * @return void
      */
@@ -44,8 +40,6 @@ class DomainService implements IDomainService
     /**
      * Connect domains as parent child
      *
-     * @param int|string $parentId
-     * @param int|string $childId
      *
      * @return void
      */
@@ -57,8 +51,6 @@ class DomainService implements IDomainService
     /**
      * Connect multiple records to a parent as children
      *
-     * @param int|string $parentId
-     * @param array $childIds
      *
      * @return void
      */
@@ -70,7 +62,6 @@ class DomainService implements IDomainService
     /**
      * Remove domain from parent, and make it a root domain
      *
-     * @param int|string $domainId
      *
      * @return void
      */
@@ -81,10 +72,6 @@ class DomainService implements IDomainService
 
     /**
      * Get a collection of domain ancestors
-     *
-     * @param int|string $domainId
-     *
-     * @return Collection
      */
     public function getAncestorDomainIds(int|string $domainId): Collection
     {
@@ -93,10 +80,6 @@ class DomainService implements IDomainService
 
     /**
      * Get a list of a domains descendants
-     *
-     * @param int|string $domainId
-     *
-     * @return Collection
      */
     public function getChildDomainIds(int|string $domainId): Collection
     {
@@ -105,10 +88,6 @@ class DomainService implements IDomainService
 
     /**
      * Get root domain Id for this domain Id
-     *
-     * @param int|string $domainId
-     *
-     * @return int|string
      */
     public function getRootDomainId(int|string $domainId): int|string
     {
@@ -118,7 +97,6 @@ class DomainService implements IDomainService
     /**
      * Get parent of this domain if exists
      *
-     * @param int|string $domainId
      *
      * @return int|string
      */

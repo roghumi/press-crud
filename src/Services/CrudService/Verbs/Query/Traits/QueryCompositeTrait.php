@@ -9,11 +9,9 @@ trait QueryCompositeTrait
     /**
      * Eloquent model creation/manipulation is not used in Query
      *
-     * @param Request $request incoming request.
-     * @param array $compositeData composition data chained to this composite.
-     * @param mixed ...$args incoming route args.
-     *
-     * @return array
+     * @param  Request  $request incoming request.
+     * @param  array  $compositeData composition data chained to this composite.
+     * @param  mixed  ...$args incoming route args.
      */
     public function getSanitized(Request $request, array $compositeData, ...$args): array
     {
@@ -27,11 +25,9 @@ trait QueryCompositeTrait
      * customize them based on the resource provider and
      * available columns,relations and filters
      *
-     * @param Request $request incoming request.
-     * @param array $compositeRules composition data chained to this composite.
-     * @param mixed ...$args incoming route args.
-     *
-     * @return array
+     * @param  Request  $request incoming request.
+     * @param  array  $compositeRules composition data chained to this composite.
+     * @param  mixed  ...$args incoming route args.
      */
     public function getRules(Request $request, array $compositeRules, ...$args): array
     {

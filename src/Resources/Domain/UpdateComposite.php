@@ -12,18 +12,15 @@ use Roghumi\Press\Crud\Services\CrudService\Verbs\Update\IUpdateVerbComposite;
  * Domain general update composite.
  * Checks for name, parentId integrity and
  * updated domains position in hierarchy.
- *
  */
 class UpdateComposite implements IUpdateVerbComposite
 {
     /**
      * Rules verified before this verb is executed.
      *
-     * @param Request $request incoming request
-     * @param array $compositeRules composition rules before this composite
-     * @param mixed ...$args incoming route args
-     *
-     * @return array
+     * @param  Request  $request incoming request
+     * @param  array  $compositeRules composition rules before this composite
+     * @param  mixed  ...$args incoming route args
      */
     public function getRules(Request $request, $compositeRules, ...$args): array
     {
@@ -37,11 +34,9 @@ class UpdateComposite implements IUpdateVerbComposite
     /**
      * Return sanitized data that will be used by eloquent for creating the model.
      *
-     * @param Request $request incoming request.
-     * @param array $compositeData composition data chained to this composite.
-     * @param mixed ...$args incoming route args.
-     *
-     * @return array
+     * @param  Request  $request incoming request.
+     * @param  array  $compositeData composition data chained to this composite.
+     * @param  mixed  ...$args incoming route args.
      */
     public function getSanitized(Request $request, array $compositeData, ...$args): array
     {
@@ -61,14 +56,12 @@ class UpdateComposite implements IUpdateVerbComposite
      * access this model and make necessary changes
      * before the model is updated.
      *
-     * @param Request $request incoming request
-     * @param Model $resource model that will be created
-     * @param mixed ...$args incoming route args
+     * @param  Request  $request incoming request
+     * @param  Model  $resource model that will be created
+     * @param  mixed  ...$args incoming route args
      *
      * @throws ValidationException
      * @throws Exception
-     *
-     * @return void
      */
     public function onBeforeUpdate(Request $request, Model $resource, ...$args): void
     {
@@ -79,14 +72,12 @@ class UpdateComposite implements IUpdateVerbComposite
      * One can use this composite callback to complete a requests
      * relation connections and more.
      *
-     * @param Request $request incoming request
-     * @param Model $resource newly created model
-     * @param mixed ...$args incoming route args
+     * @param  Request  $request incoming request
+     * @param  Model  $resource newly created model
+     * @param  mixed  ...$args incoming route args
      *
      * @throws ValidationException
      * @throws Exception
-     *
-     * @return void
      */
     public function onAfterUpdate(Request $request, Model $resource, ...$args): void
     {

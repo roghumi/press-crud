@@ -25,21 +25,11 @@ interface IAccessService
     /**
      * Create an array of action data for a crud route.
      * this data can be loaded and used on verb execution.
-     *
-     * @param ICrudVerb $verb
-     * @param ICrudResourceProvider $provider
-     *
-     * @return array
      */
     public function getCrudRouteMetadata(ICrudVerb $verb, ICrudResourceProvider $provider): array;
 
     /**
      * Get permission name for a given verb on a given resource.
-     *
-     * @param string $providerName
-     * @param string $verbName
-     *
-     * @return string
      */
     public function getPermissionNameFromVerb(
         string $providerName,
@@ -48,12 +38,6 @@ interface IAccessService
 
     /**
      * Return if user has access to verb
-     *
-     * @param IUser $user
-     * @param string $providerName
-     * @param string $verbName
-     *
-     * @return bool
      */
     public function hasAccessToVerb(
         IUser $user,
@@ -64,10 +48,7 @@ interface IAccessService
     /**
      * Return if user has all permissions.
      *
-     * @param IUser $user
-     * @param string|string[]  $permissionName
-     *
-     * @return bool
+     * @param  string|string[]  $permissionName
      */
     public function hasUserPermission(
         IUser $user,
@@ -76,17 +57,12 @@ interface IAccessService
 
     /**
      * Return if this is a valid crud route.
-     *
-     * @param Route $route
-     *
-     * @return bool
      */
     public function isValidCrudRoute(Route $route): bool;
 
     /**
      * Get resource provider associated with this route.
      *
-     * @param Route $route
      *
      * @return ICrudResourceProvider
      */
@@ -95,7 +71,6 @@ interface IAccessService
     /**
      * Get verb associated with this route.
      *
-     * @param Route $route
      *
      * @return ICrudVerb
      */
@@ -103,19 +78,11 @@ interface IAccessService
 
     /**
      * Get resource provider class associated with this route.
-     *
-     * @param Route $route
-     *
-     * @return string|null
      */
-    public function getProviderClassFromRoute(Route $route): string|null;
+    public function getProviderClassFromRoute(Route $route): ?string;
 
     /**
      * Get verb class associated with this route.
-     *
-     * @param Route $route
-     *
-     * @return string|null
      */
-    public function getVerbClassFromRoute(Route $route): string|null;
+    public function getVerbClassFromRoute(Route $route): ?string;
 }

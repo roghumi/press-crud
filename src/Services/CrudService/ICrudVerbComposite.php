@@ -15,22 +15,18 @@ interface ICrudVerbComposite
     /**
      * Rules verified before this verb is executed.
      *
-     * @param Request $request incoming request
-     * @param array $compositeRules composition rules before this composite
-     * @param mixed ...$args incoming route args
-     *
-     * @return array
+     * @param  Request  $request incoming request
+     * @param  array  $compositeRules composition rules before this composite
+     * @param  mixed  ...$args incoming route args
      */
     public function getRules(Request $request, array $compositeRules, ...$args): array;
 
     /**
      * Return sanitized data that will be used by eloquent for creating the model.
      *
-     * @param Request $request incoming request.
-     * @param array $compositeData composition data chained to this composite.
-     * @param mixed ...$args incoming route args.
-     *
-     * @return array
+     * @param  Request  $request incoming request.
+     * @param  array  $compositeData composition data chained to this composite.
+     * @param  mixed  ...$args incoming route args.
      */
     public function getSanitized(Request $request, array $compositeData, ...$args): array;
 }

@@ -17,11 +17,6 @@ class DuplicateEvent implements ShouldQueue
     /**
      * Duplicate new event instance.
      *
-     * @param string|int $userId
-     * @param string $providerClass
-     * @param string|int $sourceId
-     * @param array $duplicateIds
-     * @param int $timestamp
      *
      * @return DeleteEvent
      */
@@ -35,9 +30,6 @@ class DuplicateEvent implements ShouldQueue
         //
     }
 
-    /**
-     * @return ICrudResourceProvider
-     */
     public function getCrudProvider(): ICrudResourceProvider
     {
         $class = $this->providerClass;
@@ -45,9 +37,6 @@ class DuplicateEvent implements ShouldQueue
         return new $class();
     }
 
-    /**
-     * @return Model
-     */
     public function getSourceModel(): Model
     {
         return $this
@@ -56,9 +45,6 @@ class DuplicateEvent implements ShouldQueue
             ->getModel();
     }
 
-    /**
-     * @return Collection
-     */
     public function getDuplicatedModelIds(): Collection
     {
         return new Collection($this->duplicateIds);

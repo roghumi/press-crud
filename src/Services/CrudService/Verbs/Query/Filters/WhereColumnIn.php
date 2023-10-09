@@ -11,9 +11,8 @@ class WhereColumnIn implements IQueryFilter
     /**
      * Constructor
      *
-     * @param string $name name of filter
-     * @param string $column column name for this filter
-     *
+     * @param  string  $name name of filter
+     * @param  string  $column column name for this filter
      * @return WhereColumnIn
      */
     public function __construct(
@@ -25,9 +24,8 @@ class WhereColumnIn implements IQueryFilter
     /**
      * Static create
      *
-     * @param string $name name of filter
-     * @param string $column column name for this filter
-     *
+     * @param  string  $name name of filter
+     * @param  string  $column column name for this filter
      * @return WhereColumnIn
      */
     public static function create(string $name, string $column): IQueryFilter
@@ -37,11 +35,6 @@ class WhereColumnIn implements IQueryFilter
 
     /**
      * Apply filter conditions for a value on query builder
-     *
-     * @param Closure $filterFunction
-     * @param Builder $query
-     *
-     * @return Builder
      */
     public function applyFilter(Closure $filterFunction, Builder $query): Builder
     {
@@ -53,10 +46,6 @@ class WhereColumnIn implements IQueryFilter
     /**
      * Generate a filter function for this specific filter with $data as required params
      *   which have been validated with validateFilterRequestParams
-     *
-     * @param array $data
-     *
-     * @return Closure
      */
     public function createFilterFunctionForRequestParams(array $data): Closure
     {
@@ -73,11 +62,8 @@ class WhereColumnIn implements IQueryFilter
     /**
      * Validate request params for applying this filter
      *
-     * @param array $data
      *
      * @throws ValidationException
-     *
-     * @return array
      */
     public function validateFilterRequestParams(array $data): array
     {

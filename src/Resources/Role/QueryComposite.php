@@ -31,10 +31,8 @@ class QueryComposite implements ICrudVerbComposite, IQueryVerbComposite
      * Other composites may influence the result when final
      * verb execution is reached.
      *
-     * @param Request $request incoming request
-     * @param array $compositeColumns
-     * @param mixed ...$args
-     *
+     * @param  Request  $request incoming request
+     * @param  mixed  ...$args
      * @return array<IQueryColumn>
      */
     public function getColumns(Request $request, array $compositeColumns, ...$args): array
@@ -54,10 +52,8 @@ class QueryComposite implements ICrudVerbComposite, IQueryVerbComposite
      * Other composites may influence the result when final
      * verb execution is reached.
      *
-     * @param Request $request incoming request
-     * @param array $compositeFilters
-     * @param mixed ...$args
-     *
+     * @param  Request  $request incoming request
+     * @param  mixed  ...$args
      * @return array<IQueryFilter>
      */
     public function getFilters(Request $request, array $compositeFilters, ...$args): array
@@ -78,10 +74,8 @@ class QueryComposite implements ICrudVerbComposite, IQueryVerbComposite
      * Other composites may influence the result when final
      * verb execution is reached.
      *
-     * @param Request $request incoming request
-     * @param array $compositeRelations
-     * @param mixed ...$args
-     *
+     * @param  Request  $request incoming request
+     * @param  mixed  ...$args
      * @return array<IQueryRelation>
      */
     public function getRelations(Request $request, array $compositeRelations, ...$args): array
@@ -96,11 +90,8 @@ class QueryComposite implements ICrudVerbComposite, IQueryVerbComposite
      * Other composites may influence the result when final
      * verb execution is reached.
      *
-     * @param Request $request incoming request
-     * @param array $compositeAggregations
-     * @param mixed ...$args
-     *
-     * @return array
+     * @param  Request  $request incoming request
+     * @param  mixed  ...$args
      */
     public function getAggregateOptions(Request $request, array $compositeAggregations, ...$args): array
     {
@@ -112,14 +103,12 @@ class QueryComposite implements ICrudVerbComposite, IQueryVerbComposite
      * Called just before creating a query is used to retrieve records.
      * One should use this callback to
      *
-     * @param Request $request incoming request
-     * @param Builder $query Query that will be used
-     * @param mixed ...$args incoming route args
+     * @param  Request  $request incoming request
+     * @param  Builder  $query Query that will be used
+     * @param  mixed  ...$args incoming route args
      *
      * @throws ValidationException
      * @throws Exception
-     *
-     * @return void
      */
     public function onBeforeQuery(Request $request, Builder $query, ...$args): void
     {
@@ -133,15 +122,13 @@ class QueryComposite implements ICrudVerbComposite, IQueryVerbComposite
      * Called after a model is successfully created in database.One can
      * use this composite callback to
      *
-     * @param Request $request incoming request
-     * @param Builder $query Query that produced paginatedResult
-     * @param LengthAwarePaginator $paginatedResult query result
-     * @param mixed ...$args incoming route args
+     * @param  Request  $request incoming request
+     * @param  Builder  $query Query that produced paginatedResult
+     * @param  LengthAwarePaginator  $paginatedResult query result
+     * @param  mixed  ...$args incoming route args
      *
      * @throws ValidationException
      * @throws Exception
-     *
-     * @return void
      */
     public function onAfterQuery(Request $request, Builder $query, LengthAwarePaginator $paginatedResult, ...$args): void
     {

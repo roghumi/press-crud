@@ -21,8 +21,6 @@ class DomainProvider implements ICrudResourceProvider
 {
     /**
      * get a unique name for this resource
-     *
-     * @return string
      */
     public function getName(): string
     {
@@ -31,8 +29,6 @@ class DomainProvider implements ICrudResourceProvider
 
     /**
      * Fully qualified model class name for this resource
-     *
-     * @return string
      */
     public function getModelClass(): string
     {
@@ -43,8 +39,6 @@ class DomainProvider implements ICrudResourceProvider
      * Retrieve object by its ID
      *
      * @param  int|string  $id
-     *
-     * @return ICrudResource|null
      */
     public function getObjectById($id): ?ICrudResource
     {
@@ -53,10 +47,6 @@ class DomainProvider implements ICrudResourceProvider
 
     /**
      * Generate a new resource based on the data that can be stored later
-     *
-     * @param array $data
-     *
-     * @return Model|null
      */
     public function generateModelFromData(array $data): ?Model
     {
@@ -65,8 +55,6 @@ class DomainProvider implements ICrudResourceProvider
 
     /**
      * Verb composition map for Domain
-     *
-     * @return array
      */
     public function getAvailableVerbAndCompositions(): array
     {

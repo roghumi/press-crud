@@ -11,9 +11,6 @@ interface IRoleService
     /**
      * Attach role to user roles list
      *
-     * @param int|string $roleId
-     * @param int|string $userId
-     * @param int $zOrder
      *
      * @return void
      */
@@ -22,8 +19,6 @@ interface IRoleService
     /**
      * Detach role from user
      *
-     * @param int|string $roleId
-     * @param int|string $userId
      *
      * @return void
      */
@@ -32,9 +27,7 @@ interface IRoleService
     /**
      * add permission to roles permissions list
      *
-     * @param int|string $roleId
      * @param  string[]  $permissionsName
-     *
      * @return void
      */
     public function attachPermissionsToRole(int|string $roleId, array $permissionsName);
@@ -42,9 +35,7 @@ interface IRoleService
     /**
      * remove permission from roles permissions list
      *
-     * @param int|string $roleId
      * @param  string[]  $permissionNames
-     *
      * @return void
      */
     public function detachPermissionsFromRole(int|string $roleId, array $permissionNames);
@@ -52,9 +43,7 @@ interface IRoleService
     /**
      * sync user roles, array order becomes role orders
      *
-     * @param int|string $userId
      * @param  string[]  $roleIds
-     *
      * @return void
      */
     public function syncUserRoles(int|string $userId, array $roleIds);
@@ -62,9 +51,7 @@ interface IRoleService
     /**
      * sync user roles with name, array order becomes role orders
      *
-     * @param int|string $userId
      * @param  string[]  $roleNames
-     *
      * @return void
      */
     public function syncUserRolesWithName(int|string $userId, array $roleNames);
@@ -72,9 +59,7 @@ interface IRoleService
     /**
      * sync role permissions
      *
-     * @param int|string $roleId
-     * @param string[] $permissionNames
-     *
+     * @param  string[]  $permissionNames
      * @return void
      */
     public function syncRolePermissions(int|string $roleId, array $permissionNames);

@@ -19,14 +19,12 @@ interface IUpdateVerbComposite extends ICrudVerbComposite
      * access this model and make necessary changes
      * before the model is updated.
      *
-     * @param Request $request incoming request
-     * @param Model $resource model that will be created
-     * @param mixed ...$args incoming route args
+     * @param  Request  $request incoming request
+     * @param  Model  $resource model that will be created
+     * @param  mixed  ...$args incoming route args
      *
      * @throws ValidationException
      * @throws Exception
-     *
-     * @return void
      */
     public function onBeforeUpdate(Request $request, Model $resource, ...$args): void;
 
@@ -35,14 +33,12 @@ interface IUpdateVerbComposite extends ICrudVerbComposite
      * One can use this composite callback to complete a requests
      * relation connections and more.
      *
-     * @param Request $request incoming request
-     * @param Model $resource newly created model
-     * @param mixed ...$args incoming route args
+     * @param  Request  $request incoming request
+     * @param  Model  $resource newly created model
+     * @param  mixed  ...$args incoming route args
      *
      * @throws ValidationException
      * @throws Exception
-     *
-     * @return void
      */
     public function onAfterUpdate(Request $request, Model $resource, ...$args): void;
 }

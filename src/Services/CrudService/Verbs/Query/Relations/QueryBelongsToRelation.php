@@ -13,12 +13,7 @@ class QueryBelongsToRelation implements IQueryRelation
     /**
      * Create new instance of this query relation.
      *
-     * @param string $name
-     * @param string $providerClass
-     * @param Request $request
-     * @param mixed ...$args
-     *
-     * @return IQueryRelation
+     * @param  mixed  ...$args
      */
     public static function create(string $name, string $providerClass, Request $request, ...$args): IQueryRelation
     {
@@ -27,10 +22,6 @@ class QueryBelongsToRelation implements IQueryRelation
 
     /**
      * Get a relation loading closure for eloquent model
-     *
-     * @param array $data
-     *
-     * @return Closure
      */
     public function createEagerLoadFunctionForRelation(array $data): Closure
     {

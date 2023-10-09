@@ -19,13 +19,11 @@ interface ICreateVerbComposite extends ICrudVerbComposite
      * crud verb composite is used to create a model, now one can
      * Access this model and make necessary changes before model is stored.
      *
-     * @param Request $request incoming request
-     * @param Model $resource model that will be created
-     * @param mixed ...$args incoming route args
+     * @param  Request  $request incoming request
+     * @param  Model  $resource model that will be created
+     * @param  mixed  ...$args incoming route args
      *
      * @throws Exception
-     *
-     * @return void
      */
     public function onBeforeCreate(Request $request, Model $resource, ...$args): void;
 
@@ -34,13 +32,11 @@ interface ICreateVerbComposite extends ICrudVerbComposite
      * ne can use this composite callback to
      * complete a request relation connections and more.
      *
-     * @param Request $request incoming request
-     * @param Model $resource newly created model
-     * @param mixed ...$args incoming route args
+     * @param  Request  $request incoming request
+     * @param  Model  $resource newly created model
+     * @param  mixed  ...$args incoming route args
      *
      * @throws Exception
-     *
-     * @return void
      */
     public function onAfterCreate(Request $request, Model $resource, ...$args): void;
 }

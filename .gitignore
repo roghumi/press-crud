@@ -3,6 +3,7 @@ __MACOS*
 
 vendor
 node_modules
+
 .coverage
 .vscode
 .phpunit.*

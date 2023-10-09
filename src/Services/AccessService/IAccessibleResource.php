@@ -11,21 +11,16 @@ use Roghumi\Press\Crud\Services\DomainService\IDomain;
  * with RBAC. Implementing this interface for a resource
  * makes it responsive to domain and group based access controls.
  * Common use cases are implemented with traits:
- *
  */
 interface IAccessibleResource
 {
     /**
      * is this resource segmented by group?
-     *
-     * @return bool
      */
     public function isSegmentedByGroups(): bool;
 
     /**
      * is this resource segmented by domain?
-     *
-     * @return bool
      */
     public function isSegmentedByDomains(): bool;
 
@@ -45,8 +40,6 @@ interface IAccessibleResource
 
     /**
      * get resource provider for this resource
-     *
-     * @return ICrudResourceProvider
      */
     public function getCrudProvider(): ICrudResourceProvider;
 }

@@ -2,7 +2,7 @@ version: '3.5'
 
 services:
   ## PHP Cli Dev mode with xDebug, phpunit, phpcs
-  ### Larapress dev environement
+  ### LaraPress dev environement
   phpcli:
     build:
       dockerfile: dev/Dockerfile.phpcli

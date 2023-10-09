@@ -11,9 +11,6 @@ class RoleService implements IRoleService
     /**
      * Attach role to user roles list
      *
-     * @param int|string $roleId
-     * @param int|string $userId
-     * @param int $zOrder
      *
      * @return void
      */
@@ -30,8 +27,6 @@ class RoleService implements IRoleService
     /**
      * Detach role from user
      *
-     * @param int|string $roleId
-     * @param int|string $userId
      *
      * @return void
      */
@@ -46,9 +41,7 @@ class RoleService implements IRoleService
     /**
      * add permission to roles permissions list
      *
-     * @param int|string $roleId
      * @param  string[]  $permissionsName
-     *
      * @return void
      */
     public function attachPermissionsToRole(int|string $roleId, array $permissionsName)
@@ -66,9 +59,7 @@ class RoleService implements IRoleService
     /**
      * remove permission from roles permissions list
      *
-     * @param int|string $roleId
      * @param  string[]  $permissionNames
-     *
      * @return void
      */
     public function detachPermissionsFromRole(int|string $roleId, array $permissionNames)
@@ -86,9 +77,7 @@ class RoleService implements IRoleService
     /**
      * sync user roles, array order becomes role orders
      *
-     * @param int|string $userId
      * @param  string[]  $roleIds
-     *
      * @return void
      */
     public function syncUserRoles(int|string $userId, array $roleIds)
@@ -109,9 +98,7 @@ class RoleService implements IRoleService
     /**
      * sync user roles with name, array order becomes role orders
      *
-     * @param int|string $userId
      * @param  string[]  $roleNames
-     *
      * @return void
      */
     public function syncUserRolesWithName(int|string $userId, array $roleNames)
@@ -132,9 +119,7 @@ class RoleService implements IRoleService
     /**
      * sync role permissions
      *
-     * @param int|string $roleId
-     * @param string[] $permissionNames
-     *
+     * @param  string[]  $permissionNames
      * @return void
      */
     public function syncRolePermissions(int|string $roleId, array $permissionNames)

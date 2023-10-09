@@ -11,7 +11,6 @@ class CrudService implements ICrudService
      * Undocumented function
      *
      * @param  array<ICrudResourceProvider>  $providers
-     *
      * @return null
      */
     public function registerCrudRoutes(array $providers): void
@@ -48,12 +47,7 @@ class CrudService implements ICrudService
     /**
      * Execute a verb and return response
      *
-     * @param ICrudVerb $verb
-     * @param ICrudResourceProvider $provider
-     * @param Request $request
-     * @param mixed ...$args
-     *
-     * @return JsonResponse
+     * @param  mixed  ...$args
      */
     public function executeVerbForResource(
         ICrudVerb $verb,

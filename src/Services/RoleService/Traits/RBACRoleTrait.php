@@ -26,8 +26,6 @@ trait RBACRoleTrait
 
     /**
      * Get name for this role
-     *
-     * @return string
      */
     public function getName(): string
     {
@@ -46,8 +44,6 @@ trait RBACRoleTrait
 
     /**
      * is this role a super admin role
-     *
-     * @return bool
      */
     public function isSuperAdmin(): bool
     {
@@ -56,8 +52,6 @@ trait RBACRoleTrait
 
     /**
      * is this role a domain admin role
-     *
-     * @return bool
      */
     public function isDomainAdmin(): bool
     {
@@ -66,8 +60,6 @@ trait RBACRoleTrait
 
     /**
      * is this role a group admin role
-     *
-     * @return bool
      */
     public function isGroupAdmin(): bool
     {
@@ -78,8 +70,6 @@ trait RBACRoleTrait
      * Is this role a none admin role.
      * None admin roles only can see what they have
      * authored only.
-     *
-     * @return bool
      */
     public function isNonAdmin(): bool
     {
@@ -92,8 +82,6 @@ trait RBACRoleTrait
      * Get maximum clearance for user options level.
      * This is a tool to prevent users with lower clearance
      * creating roles with higher clearance values.
-     *
-     * @return int
      */
     public function getOptionsLevel(): int
     {

@@ -27,8 +27,6 @@ trait RBACDomainTrait
 
     /**
      * Get name for this domain
-     *
-     * @return string
      */
     public function getDomainName(): string
     {

@@ -45,10 +45,8 @@ trait RBACUserTrait
 
     /**
      * Undocumented function
-     *
-     * @return IAccessRole|null
      */
-    public function getTopRole(): IAccessRole|null
+    public function getTopRole(): ?IAccessRole
     {
         return $this->roles?->first();
     }
@@ -75,8 +73,6 @@ trait RBACUserTrait
 
     /**
      * The roles that belong to the user
-     *
-     * @return BelongsToMany
      */
     public function roles(): BelongsToMany
     {
@@ -87,8 +83,6 @@ trait RBACUserTrait
 
     /**
      * The domains that belong to the user
-     *
-     * @return BelongsToMany
      */
     public function domains(): BelongsToMany
     {
@@ -97,8 +91,6 @@ trait RBACUserTrait
 
     /**
      * The groups that belong to the user
-     *
-     * @return BelongsToMany
      */
     public function groups(): BelongsToMany
     {

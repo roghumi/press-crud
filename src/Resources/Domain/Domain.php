@@ -45,8 +45,6 @@ class Domain extends Model implements ICrudResource, IDomain
 
     /**
      * Factory function
-     *
-     * @return Factory
      */
     protected static function newFactory(): Factory
     {
@@ -55,8 +53,6 @@ class Domain extends Model implements ICrudResource, IDomain
 
     /**
      * get eloquent object for this resource item
-     *
-     * @return Model
      */
     public function getModel(): Model
     {

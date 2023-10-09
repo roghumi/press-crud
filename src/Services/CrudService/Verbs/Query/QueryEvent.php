@@ -15,9 +15,6 @@ class QueryEvent implements ShouldQueue
     /**
      * Create a new event instance.
      *
-     * @param int|string $userId
-     * @param string $providerClass
-     * @param int $timestamp
      *
      * @return void
      */
@@ -29,9 +26,6 @@ class QueryEvent implements ShouldQueue
         //
     }
 
-    /**
-     * @return ICrudResourceProvider
-     */
     public function getCrudProvider(): ICrudResourceProvider
     {
         $class = $this->providerClass;

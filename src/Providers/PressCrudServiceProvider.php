@@ -18,6 +18,7 @@ class PressCrudServiceProvider extends ServiceProvider
 {
     use MigrationPublishTrait;
 
+    /** @phpcs:ignore Squiz.Commenting.FunctionComment */
     public function register()
     {
         $this->app->bind(IAccessService::class, AccessService::class);
@@ -26,6 +27,7 @@ class PressCrudServiceProvider extends ServiceProvider
         $this->app->bind(IDomainService::class, DomainService::class);
     }
 
+    /** @phpcs:ignore Squiz.Commenting.FunctionComment */
     public function boot()
     {
         $this->mergeConfigFrom(__DIR__ . '/../../config/press/crud.php', 'press.crud');

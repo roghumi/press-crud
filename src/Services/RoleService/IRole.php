@@ -30,8 +30,6 @@ interface IRole
 
     /**
      * Get name for this role
-     *
-     * @return string
      */
     public function getName(): string;
 

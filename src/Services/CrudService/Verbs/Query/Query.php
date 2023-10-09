@@ -35,8 +35,6 @@ class Query implements ICrudVerb
 
     /**
      * Verb name used for RBAC
-     *
-     * @return string
      */
     public function getName(): string
     {
@@ -46,9 +44,7 @@ class Query implements ICrudVerb
     /**
      * Generate and register a new route based on a crud resource provider
      *
-     * @param ICrudResourceProvider $provider resource provider to use for route generation.
-     *
-     * @return Route
+     * @param  ICrudResourceProvider  $provider resource provider to use for route generation.
      */
     public function getRouteForResource(ICrudResourceProvider $provider): Route
     {
@@ -62,14 +58,12 @@ class Query implements ICrudVerb
     /**
      * execute crud verb with a request and resource provider
      *
-     * @param Request $request Incoming request.
-     * @param ICrudResourceProvider $provider Resource provider to use.
-     * @param mixed ...$args Other Parameters of this verb, defined in route registration function most of the times.
+     * @param  Request  $request Incoming request.
+     * @param  ICrudResourceProvider  $provider Resource provider to use.
+     * @param  mixed  ...$args Other Parameters of this verb, defined in route registration function most of the times.
      *
      * @throws ValidationException Will throw validation exception if request does not comply with verbs compositions.
      * @throws Exception Other general exceptions.
-     *
-     * @return mixed
      */
     public function execRequest(Request $request, ICrudResourceProvider $provider, ...$args): mixed
     {
@@ -232,10 +226,8 @@ class Query implements ICrudVerb
     /**
      * get sanitized output for this verb
      *
-     * @param Request $request incoming request
-     * @param mixed $resultSet output response from execRequest
-     *
-     * @return array
+     * @param  Request  $request incoming request
+     * @param  mixed  $resultSet output response from execRequest
      */
     public function getSanitizedOutput(Request $request, mixed $resultSet): array
     {
@@ -259,9 +251,8 @@ class Query implements ICrudVerb
     /**
      * get a list of callbacks for applying requested $relations from $validRelations list
      *
-     * @param array $relations request relations as described in QueryCompositeTrait
-     * @param Collection $validRelations available relations
-     *
+     * @param  array  $relations request relations as described in QueryCompositeTrait
+     * @param  Collection  $validRelations available relations
      * @return IQueryRelation[]
      */
     protected function getEloquentRelations(array $relations, Collection $validRelations): array
@@ -284,9 +275,8 @@ class Query implements ICrudVerb
     /**
      * get a list of callbacks for applying requested $filters from $validFilters list
      *
-     * @param array $filters request filters as described in QueryCompositeTrait
-     * @param Collection $validFilters available filters
-     *
+     * @param  array  $filters request filters as described in QueryCompositeTrait
+     * @param  Collection  $validFilters available filters
      * @return IQueryFilter[]
      */
     protected function getEloquentFilters(array $filters, Collection $validFilters): array
@@ -309,9 +299,8 @@ class Query implements ICrudVerb
     /**
      * get a list of callbacks for applying requested $column selection from $validColumns list
      *
-     * @param array $columns request columns as described in QueryCompositeTrait
-     * @param Collection $validColumns available columns
-     *
+     * @param  array  $columns request columns as described in QueryCompositeTrait
+     * @param  Collection  $validColumns available columns
      * @return IQueryColumn[]
      */
     protected function getEloquentColumns(array $columns, Collection $validColumns): array

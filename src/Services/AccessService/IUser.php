@@ -8,7 +8,6 @@ use Illuminate\Support\Collection;
  * RBAC User interface.
  * RBACUserTrait has the default implementation of
  * this interface.
- *
  */
 interface IUser
 {
@@ -35,10 +34,8 @@ interface IUser
 
     /**
      * User top ranked role
-     *
-     * @return IAccessRole|null
      */
-    public function getTopRole(): IAccessRole|null;
+    public function getTopRole(): ?IAccessRole;
 
     /**
      * User permissions

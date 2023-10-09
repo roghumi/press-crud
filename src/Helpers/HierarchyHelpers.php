@@ -11,7 +11,6 @@ class HierarchyHelpers
     /**
      * Connect hierarchy ids as parent child.
      *
-     *
      * @return void
      *
      * @throws HierarchyLoopException

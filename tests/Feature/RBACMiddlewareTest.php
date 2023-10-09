@@ -53,9 +53,9 @@ class RBACMiddlewareTest extends TestCase
             function () {
                 $this->withoutExceptionHandling()
                     ->actingAs(User::find(2))->post(config('press.crud.prefix').'/domain/query', [
-                    'perPage' => 5,
-                    'rc' => 101,
-                ]);
+                        'perPage' => 5,
+                        'rc' => 101,
+                    ]);
             },
             AccessDeniedException::class
         );

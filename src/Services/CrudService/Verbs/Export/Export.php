@@ -18,8 +18,6 @@ class Export extends Query
 
     /**
      * Verb name used for RBAC
-     *
-     * @return string
      */
     public function getName(): string
     {
@@ -29,9 +27,7 @@ class Export extends Query
     /**
      * Generate and register a new route based on a crud resource provider
      *
-     * @param ICrudResourceProvider $provider resource provider to use for route generation.
-     *
-     * @return Route
+     * @param  ICrudResourceProvider  $provider resource provider to use for route generation.
      */
     public function getRouteForResource(ICrudResourceProvider $provider): Route
     {
@@ -45,14 +41,12 @@ class Export extends Query
     /**
      * execute crud verb with a request and resource provider
      *
-     * @param Request $request Incoming request.
-     * @param ICrudResourceProvider $provider Resource provider to use.
-     * @param mixed ...$args Other Parameters of this verb, defined in route registration function most of the times.
+     * @param  Request  $request Incoming request.
+     * @param  ICrudResourceProvider  $provider Resource provider to use.
+     * @param  mixed  ...$args Other Parameters of this verb, defined in route registration function most of the times.
      *
      * @throws ValidationException Will throw validation exception if request does not comply with verbs compositions.
      * @throws Exception Other general exceptions.
-     *
-     * @return mixed
      */
     public function execRequest(Request $request, ICrudResourceProvider $provider, ...$args): mixed
     {
@@ -63,10 +57,8 @@ class Export extends Query
     /**
      * Undocumented function
      *
-     * @param Request $request incoming request
-     * @param mixed $resultSet output response from execRequest
-     *
-     * @return array
+     * @param  Request  $request incoming request
+     * @param  mixed  $resultSet output response from execRequest
      */
     public function getSanitizedOutput(Request $request, mixed $resultSet): array
     {

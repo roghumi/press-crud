@@ -15,21 +15,14 @@ interface ICrudService
     /**
      * Register a route for each verb of these resource provider classes.
      *
-     * @param string[] $providerClassNames
-     *
-     * @return void
+     * @param  string[]  $providerClassNames
      */
     public function registerCrudRoutes(array $providerClassNames): void;
 
     /**
      * Execute a verb and return response
      *
-     * @param ICrudVerb $verb
-     * @param ICrudResourceProvider $provider
-     * @param Request $request
-     * @param mixed ...$args
-     *
-     * @return JsonResponse
+     * @param  mixed  ...$args
      */
     public function executeVerbForResource(
         ICrudVerb $verb,

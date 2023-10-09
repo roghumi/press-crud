@@ -17,7 +17,6 @@ use Roghumi\Press\Crud\Services\CrudService\ICrudVerb;
  * The resource provider will provide ICrudVerbComposition to
  * be used for rule verification and sanitization, also
  * before and after callbacks.
- *
  */
 class Create implements ICrudVerb
 {
@@ -27,8 +26,6 @@ class Create implements ICrudVerb
 
     /**
      * Verb name used for RBAC
-     *
-     * @return string
      */
     public function getName(): string
     {
@@ -38,9 +35,7 @@ class Create implements ICrudVerb
     /**
      * Generate and register a new route based on a crud resource provider
      *
-     * @param ICrudResourceProvider $provider resource provider to use for route generation.
-     *
-     * @return Route
+     * @param  ICrudResourceProvider  $provider resource provider to use for route generation.
      */
     public function getRouteForResource(ICrudResourceProvider $provider): Route
     {
@@ -54,15 +49,14 @@ class Create implements ICrudVerb
     /**
      * Undocumented function
      *
-     * @param Request $request Incoming request.
-     * @param ICrudResourceProvider $provider Resource provider to use.
-     * @param mixed ...$args Other Parameters of this verb, defined in route registration function most of the times.
+     * @param  Request  $request Incoming request.
+     * @param  ICrudResourceProvider  $provider Resource provider to use.
+     * @param  mixed  ...$args Other Parameters of this verb, defined in route registration function most of the times.
      *
      * @throws Exception
      * @throws ValidationException
      *
      * @dispatches CreateEvent
-     * @return mixed
      */
     public function execRequest(Request $request, ICrudResourceProvider $provider, ...$args): mixed
     {
@@ -114,10 +108,8 @@ class Create implements ICrudVerb
      * get sanitized output for this request
      *  params is an array of params from @exec function appended with result of @exec at end
      *
-     * @param Request $request incoming request
-     * @param mixed $execResult output response from execRequest
-     *
-     * @return array
+     * @param  Request  $request incoming request
+     * @param  mixed  $execResult output response from execRequest
      */
     public function getSanitizedOutput(Request $request, mixed $execResult): array
     {

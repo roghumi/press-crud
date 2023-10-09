@@ -1,46 +1,45 @@
 {
-    "name": "roghumi/press-crud",
-    "description": "Easy CRUD REST API for Laravel.",
-    "type": "library",
-    "license": "MIT",
-    "version": "dev-master",
-    "autoload": {
-        "psr-4": {
-            "Roghumi\\Press\\Crud\\": "src/"
-        }
-    },
-    "autoload-dev": {
-        "psr-4": {
-            "Roghumi\\Press\\Crud\\Tests\\": "tests/",
-            "Roghumi\\Press\\Crud\\Database\\Factories\\": "database/factories/"
-        }
-    },
-    "authors": [
-        {
-            "name": "Roghumi Systems",
-            "email": "larapress@roghumi.com",
-            "homepage": "https://larapress.roghumi.com"
-        }
-    ],
-    "minimum-stability": "dev",
-    "extra": {
-        "laravel": {
-            "providers": [
-                "Roghumi\\Press\\Crud\\Providers\\PressCrudServiceProvider"
-            ]
-        }
-    },
-    "require-dev": {
-        "orchestra/testbench": "^8.0",
-        "tightenco/duster": "dev-main",
-        "phpunit/phpunit": "10.1@dev",
-        "phpunit/php-code-coverage": "^10.1@dev"
-    },
-    "require": {
-        "illuminate/support": "*"
-    },
-    "config": {
-        "allow-plugins": {
-        }
+  "name": "roghumi/press-crud",
+  "description": "Easy CRUD REST API for Laravel.",
+  "type": "library",
+  "license": "MIT",
+  "version": "dev-master",
+  "minimum-stability": "dev",
+  "autoload": {
+    "psr-4": {
+      "Roghumi\\Press\\Crud\\": "src/"
     }
+  },
+  "autoload-dev": {
+    "psr-4": {
+      "Roghumi\\Press\\Crud\\Tests\\": "tests/",
+      "Roghumi\\Press\\Crud\\Database\\Factories\\": "database/factories/"
+    }
+  },
+  "authors": [
+    {
+      "name": "Roghumi Systems",
+      "email": "larapress@roghumi.com",
+      "homepage": "https://larapress.roghumi.com"
+    }
+  ],
+  "extra": {
+    "laravel": {
+      "providers": [
+        "Roghumi\\Press\\Crud\\Providers\\PressCrudServiceProvider"
+      ]
+    }
+  },
+  "require-dev": {
+    "orchestra/testbench": "^8.0",
+    "tightenco/duster": "dev-main",
+    "phpunit/phpunit": "10.1@dev",
+    "phpunit/php-code-coverage": "^10.1@dev"
+  },
+  "require": {
+    "illuminate/support": "*"
+  },
+  "config": {
+    "allow-plugins": {}
+  }
 }

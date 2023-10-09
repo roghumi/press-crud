@@ -14,11 +14,9 @@ class DuplicateComposite extends UpdateComposite implements IDuplicateVerbCompos
     /**
      * Rules for this verb on resource.
      *
-     * @param Request $request incoming request
-     * @param array $compositeRules composition rules before this composite
-     * @param mixed ...$args incoming route args
-     *
-     * @return array
+     * @param  Request  $request incoming request
+     * @param  array  $compositeRules composition rules before this composite
+     * @param  mixed  ...$args incoming route args
      */
     public function getRules(Request $request, $compositeRules, ...$args): array
     {
@@ -34,14 +32,12 @@ class DuplicateComposite extends UpdateComposite implements IDuplicateVerbCompos
      * Before duplicating domains, prefix duplicated domains with a
      *  random generated string.
      *
-     * @param Request $request incoming request.
-     * @param Model $source source model that is used for duplicating.
-     * @param Collection $targets Array of target objects created and ready to be stored in database.
-     * @param mixed ...$args incoming route args.
+     * @param  Request  $request incoming request.
+     * @param  Model  $source source model that is used for duplicating.
+     * @param  Collection  $targets Array of target objects created and ready to be stored in database.
+     * @param  mixed  ...$args incoming route args.
      *
      * @throws Exception
-     *
-     * @return void
      */
     public function onBeforeDuplicate(Request $request, Model $source, Collection $targets, ...$args): void
     {
@@ -53,14 +49,12 @@ class DuplicateComposite extends UpdateComposite implements IDuplicateVerbCompos
     /**
      * After duplicating, position duplicates on same parent as source domain.
      *
-     * @param Request $request incoming request.
-     * @param Model $source source model that is used for duplicating.
-     * @param Collection $targets Array of target objects created and stored in database.
-     * @param mixed ...$args incoming route args.
+     * @param  Request  $request incoming request.
+     * @param  Model  $source source model that is used for duplicating.
+     * @param  Collection  $targets Array of target objects created and stored in database.
+     * @param  mixed  ...$args incoming route args.
      *
      * @throws Exception
-     *
-     * @return void
      */
     public function onAfterDuplicate(Request $request, Model $source, Collection $targets, ...$args): void
     {

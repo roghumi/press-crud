@@ -21,10 +21,6 @@ class CreateEvent implements ShouldQueue
     /**
      * Create a new event instance.
      *
-     * @param string|int $userId
-     * @param string $providerClass
-     * @param string|int $modelId
-     * @param int $timestamp
      *
      * @return CreateEvent
      */
@@ -37,9 +33,6 @@ class CreateEvent implements ShouldQueue
         //
     }
 
-    /**
-     * @return ICrudResourceProvider
-     */
     public function getCrudProvider(): ICrudResourceProvider
     {
         if (is_null($this->provider)) {
@@ -50,9 +43,6 @@ class CreateEvent implements ShouldQueue
         return $this->provider;
     }
 
-    /**
-     * @return Model
-     */
     public function getObjectModel(): Model
     {
         return $this
@@ -61,9 +51,6 @@ class CreateEvent implements ShouldQueue
             ->getModel();
     }
 
-    /**
-     * @return IUser
-     */
     public function getDispatcher(): IUser
     {
         return UserHelpers::getUserWithId($this->userId);
