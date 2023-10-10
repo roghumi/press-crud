@@ -1,0 +1,58 @@
+#
+# LaraPress resource definition.
+#
+resource: Group
+provider: GroupProvider
+namespace: Roghumi\Press\Crud\Resources\Group
+timestamps: true
+softDeletes: true
+ignoreFiles:
+  - resource
+
+verbs:
+  - verb: Create
+    comp: CreateComposition
+  - verb: Update
+    comp: UpdateComposition
+  - verb: Query
+    comp: QueryComposition
+  - verb: Export
+    comp: ExportComposition
+  - verb: Clone
+    comp: CloneComposition
+  - verb: Export
+    comp: ExportComposition
+
+columns:
+  - name: id
+    type: string
+    sort: true
+    input: false
+    filters:
+      - equals
+      - between
+  - name: name
+    type: string
+    sort: true
+    rules: string|required|unique:groups,name
+    excludeSelfInUpdate: true # in update verb, exclude self id
+    filters:
+      - equals
+      - contains
+  - name: author_id
+    type: string
+    sort: true
+    input: auth_id
+    filters:
+      - equals
+      - between
+  - name: options
+    type: numeric
+    sort: true
+    rules: numeric|nullable|min:0
+    filters:
+      - equals
+
+relations:
+  - name: author
+    type: BelongsTo

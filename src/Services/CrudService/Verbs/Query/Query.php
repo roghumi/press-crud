@@ -277,7 +277,7 @@ class Query implements ICrudVerb
      * get a list of callbacks for applying requested $filters from $validFilters list
      *
      * @param  array  $filters request filters as described in QueryCompositeTrait
-     * @param  Collection  $validFilters available filters
+     * @param  Collection  $validFilters available filters for resource
      * @return IQueryFilter[]
      */
     protected function getEloquentFilters(array $filters, Collection $validFilters): array

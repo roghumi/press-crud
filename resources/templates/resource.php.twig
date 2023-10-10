@@ -1,0 +1,63 @@
+namespace {{ namespace }};
+
+{% if factory %}
+use Illuminate\Database\Eloquent\Factories\Factory;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Roghumi\Press\Crud\Database\Factories\GroupFactory;
+{% endif %}
+use Illuminate\Database\Eloquent\Model;
+{% if softDeletes %}
+use Illuminate\Database\Eloquent\SoftDeletes;
+{% endif %}
+
+use Roghumi\Press\Crud\Services\AccessService\IUser;
+use Roghumi\Press\Crud\Services\CrudService\ICrudResource;
+
+/**
+ * {{ resource }} Model
+ *
+ * @resource
+ *
+{% if timestamps %}
+ * @property \Carbon\Carbon $created_at
+ * @property \Carbon\Carbon $updated_at
+{% endif %}
+{% if softDeletes %}
+ * @property \Carbon\Carbon|null $deleted_at
+{% endif %}
+{% for prop in columns %}
+ * @property {{ prop['type'] }} ${{ prop['name'] }}
+{% endfor %}
+ */
+class {{ resource }} extends Model implements ICrudResource
+{
+{% if factory %}
+    use HasFactory;
+{% endif %}
+{% if softDeletes %}
+    use SoftDeletes;
+{% endif %}
+
+    protected $fillable = [
+{% for link in columns %}
+{% if not link.input is same as false %}
+        '{{ link.name }}'
+{% endif %}
+{% endfor %}
+    ];
+
+{% if factory %}
+    protected static function newFactory(): Factory
+    {
+        return GroupFactory::new();
+    }
+{% endif %}
+
+    /**
+     * get eloquent object for this resource item
+     */
+    public function getModel(): Model
+    {
+        return $this;
+    }
+}
