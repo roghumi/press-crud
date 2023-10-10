@@ -5,8 +5,8 @@ namespace Roghumi\Press\Crud\Services\CrudService\Verbs\Create;
 use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Route;
-use Illuminate\Support\Facades\Auth;
 use Illuminate\Validation\ValidationException;
+use Roghumi\Press\Crud\Helpers\UserHelpers;
 use Roghumi\Press\Crud\Services\AccessService\Traits\RBACVerbTrait;
 use Roghumi\Press\Crud\Services\CrudService\ICrudResourceProvider;
 use Roghumi\Press\Crud\Services\CrudService\ICrudVerb;
@@ -47,16 +47,14 @@ class Create implements ICrudVerb
     }
 
     /**
-     * Undocumented function
+     * execute the verbs logic with a provider and request
      *
      * @param  Request  $request Incoming request.
      * @param  ICrudResourceProvider  $provider Resource provider to use.
      * @param  mixed  ...$args Other Parameters of this verb, defined in route registration function most of the times.
      *
-     * @throws Exception
-     * @throws ValidationException
-     *
-     * @dispatches CreateEvent
+     * @throws ValidationException Will throw validation exception if request does not comply with verbs compositions.
+     * @throws Exception Other general exceptions.
      */
     public function execRequest(Request $request, ICrudResourceProvider $provider, ...$args): mixed
     {
@@ -87,7 +85,7 @@ class Create implements ICrudVerb
             // verb dispatch events callback
             function ($model) use ($provider) {
                 CreateEvent::dispatch(
-                    Auth::user()?->id ?? null,
+                    UserHelpers::getAuthUserId(),
                     get_class($provider),
                     $model->id,
                     time()

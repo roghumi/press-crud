@@ -12,6 +12,7 @@ use Illuminate\Support\Collection;
 use Illuminate\Support\Str;
 use Illuminate\Validation\Rule;
 use Illuminate\Validation\ValidationException;
+use Roghumi\Press\Crud\Helpers\UserHelpers;
 use Roghumi\Press\Crud\Services\AccessService\Traits\RBACVerbTrait;
 use Roghumi\Press\Crud\Services\CrudService\ICrudResourceProvider;
 use Roghumi\Press\Crud\Services\CrudService\ICrudVerb;
@@ -169,7 +170,7 @@ class Query implements ICrudVerb
             },
             // verb dispatch events callback
             function ($result) use ($provider) {
-                QueryEvent::dispatch(get_class($provider), time());
+                QueryEvent::dispatch(UserHelpers::getAuthUserId(), get_class($provider), time());
             },
             // custom composite callback
             function ($composite) use (

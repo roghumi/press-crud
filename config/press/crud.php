@@ -21,7 +21,7 @@ return [
         \Roghumi\Press\Crud\Services\CrudService\Verbs\Update\Update::class,
         \Roghumi\Press\Crud\Services\CrudService\Verbs\Query\Query::class,
         \Roghumi\Press\Crud\Services\CrudService\Verbs\Export\Export::class,
-        \Roghumi\Press\Crud\Services\CrudService\Verbs\Duplicate\Duplicate::class,
+        \Roghumi\Press\Crud\Services\CrudService\Verbs\Clone\CloneVerb::class,
         \Roghumi\Press\Crud\Services\CrudService\Verbs\Delete\Delete::class,
         \Roghumi\Press\Crud\Services\CrudService\Verbs\Restore\Restore::class,
     ],

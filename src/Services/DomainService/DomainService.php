@@ -72,6 +72,9 @@ class DomainService implements IDomainService
 
     /**
      * Get a collection of domain ancestors
+     *
+     *
+     * @return Closure
      */
     public function getAncestorDomainIds(int|string $domainId): Collection
     {

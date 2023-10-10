@@ -21,7 +21,7 @@ interface IDeleteVerbComposite extends ICrudVerbComposite
      *
      * @param  Request  $request incoming request
      * @param  Model  $resource model that will be deleted
-     * @param  array  ...$args incoming route args
+     * @param  mixed  ...$args incoming route args
      *
      * @throws Exception
      */
@@ -34,7 +34,7 @@ interface IDeleteVerbComposite extends ICrudVerbComposite
      *
      * @param  Request  $request incoming request
      * @param  Model  $resource model that was deleted
-     * @param  array  ..$args incoming route args
+     * @param  mixed  ...$args incoming route args
      *
      * @throws Exception
      */

@@ -32,7 +32,7 @@ class AccessService implements IAccessService
     }
 
     /**
-     * Get permission name for a given verb on a given resource.
+     * Get permission name for a verb on a resource
      */
     public function getPermissionNameFromVerb(
         string $providerName,
@@ -98,9 +98,6 @@ class AccessService implements IAccessService
 
     /**
      * Get resource provider associated with this route.
-     *
-     *
-     * @return ICrudResourceProvider
      */
     public function getProviderFromRoute(Route $route): ?ICrudResourceProvider
     {

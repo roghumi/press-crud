@@ -9,13 +9,13 @@ use Illuminate\Validation\ValidationException;
 use Roghumi\Press\Crud\Exceptions\ResourceNotFoundException;
 use Roghumi\Press\Crud\Resources\Domain\Domain;
 use Roghumi\Press\Crud\Resources\Domain\DomainProvider;
-use Roghumi\Press\Crud\Services\CrudService\Verbs\Duplicate\Duplicate;
-use Roghumi\Press\Crud\Services\CrudService\Verbs\Duplicate\DuplicateEvent;
+use Roghumi\Press\Crud\Services\CrudService\Verbs\Clone\CloneEvent;
+use Roghumi\Press\Crud\Services\CrudService\Verbs\Clone\CloneVerb;
 use Roghumi\Press\Crud\Tests\Helpers\CrudAPITestBase;
 use Roghumi\Press\Crud\Tests\Helpers\CrudTestInvalidRequest;
 use Roghumi\Press\Crud\Tests\Helpers\CrudTestValidRequest;
 
-class DomainDuplicateTest extends CrudAPITestBase
+class DomainCloneTest extends CrudAPITestBase
 {
     protected function postSetup()
     {
@@ -25,57 +25,57 @@ class DomainDuplicateTest extends CrudAPITestBase
     public function getValidRequests()
     {
         return [
-            // duplicate #1
+            // clone #1
             new CrudTestValidRequest(
-                'api/domain/1/duplicate',
+                'api/domain/1/clone',
                 'POST',
                 new Request([
                 ]),
                 function () {
                     Domain::factory(1)->create();
                     Event::fake([
-                        DuplicateEvent::class,
+                        CloneEvent::class,
                     ]);
                 },
                 function (TestResponse $response) {
                     $response->assertStatus(200);
                     $response->assertJsonIsObject();
-                    $response->assertJsonPath('message', trans('press.crud.verbs.duplicate.success'));
+                    $response->assertJsonPath('message', trans('press.crud.verbs.clone.success'));
                     $response->assertJsonPath('items.0.id', 2);
 
-                    Event::assertDispatched(DuplicateEvent::class, function (DuplicateEvent $event) {
+                    Event::assertDispatched(CloneEvent::class, function (CloneEvent $event) {
                         $this->assertInstanceOf(DomainProvider::class, $event->getCrudProvider());
                         $this->assertEquals($event->getSourceModel()->id, 1);
-                        $this->assertEquals($event->getDuplicatedModelIds()->toArray(), [2]);
+                        $this->assertEquals($event->getClonedModelIds()->toArray(), [2]);
 
                         return true;
                     });
                 },
                 1
             ),
-            // duplicate #2 count 3
+            // clone #2 count 3
             new CrudTestValidRequest(
-                'api/domain/2/duplicate/3',
+                'api/domain/2/clone/3',
                 'POST',
                 new Request([
                 ]),
                 function () {
                     Event::fake([
-                        DuplicateEvent::class,
+                        CloneEvent::class,
                     ]);
                 },
                 function (TestResponse $response) {
                     $response->assertStatus(200);
                     $response->assertJsonIsObject();
-                    $response->assertJsonPath('message', trans('press.crud.verbs.duplicate.success'));
+                    $response->assertJsonPath('message', trans('press.crud.verbs.clone.success'));
                     $response->assertJsonPath('items.0.id', 3);
                     $response->assertJsonPath('items.1.id', 4);
                     $response->assertJsonPath('items.2.id', 5);
 
-                    Event::assertDispatched(DuplicateEvent::class, function (DuplicateEvent $event) {
+                    Event::assertDispatched(CloneEvent::class, function (CloneEvent $event) {
                         $this->assertInstanceOf(DomainProvider::class, $event->getCrudProvider());
                         $this->assertEquals($event->getSourceModel()->id, 2);
-                        $this->assertEquals($event->getDuplicatedModelIds()->toArray(), [3, 4, 5]);
+                        $this->assertEquals($event->getClonedModelIds()->toArray(), [3, 4, 5]);
 
                         return true;
                     });
@@ -89,9 +89,9 @@ class DomainDuplicateTest extends CrudAPITestBase
     public function getInvalidRequests()
     {
         return [
-            // duplicate not existing
+            // clone not existing
             new CrudTestInvalidRequest(
-                'api/domain/33/duplicate',
+                'api/domain/33/clone',
                 'POST',
                 new Request([]),
                 function () {
@@ -101,9 +101,9 @@ class DomainDuplicateTest extends CrudAPITestBase
                 ResourceNotFoundException::class,
                 33
             ),
-            // duplicate with existing name
+            // clone with existing name
             new CrudTestInvalidRequest(
-                'api/domain/33/duplicate',
+                'api/domain/33/clone',
                 'POST',
                 new Request([
                     'name' => 'example.com',
@@ -125,12 +125,13 @@ class DomainDuplicateTest extends CrudAPITestBase
 
     /**
      * @group Domain
-     * @group CrudDuplicate
+     * @group Api
+     * @group ApiClone
      */
     public function test_domain_duplicate_success()
     {
         $this->performValidRequestsTests(
-            new Duplicate(),
+            new CloneVerb(),
             new DomainProvider(),
             $this->getValidRequests()
         );
@@ -138,12 +139,13 @@ class DomainDuplicateTest extends CrudAPITestBase
 
     /**
      * @group Domain
-     * @group CrudDuplicate
+     * @group Api
+     * @group ApiClone
      */
-    public function test_domain_duplicate_invalid_requests()
+    public function test_domain_clone_invalid_requests()
     {
         $this->performInvalidRequestsTests(
-            new Duplicate(),
+            new CloneVerb(),
             new DomainProvider(),
             $this->getInvalidRequests()
         );
@@ -152,9 +154,9 @@ class DomainDuplicateTest extends CrudAPITestBase
     /**
      * @group Domain
      * @group Api
-     * @group ApiDuplicate
+     * @group ApiClone
      */
-    public function test_domain_duplicate_valid_api()
+    public function test_domain_clone_valid_api()
     {
         $this->performValidApiRequestsTests($this->getValidRequests());
     }
@@ -162,9 +164,9 @@ class DomainDuplicateTest extends CrudAPITestBase
     /**
      * @group Domain
      * @group Api
-     * @group ApiDuplicate
+     * @group ApiClone
      */
-    public function test_domain_duplicate_invalid_api()
+    public function test_domain_clone_invalid_api()
     {
         $this->performInvalidApiRequestsTests($this->getInvalidRequests());
     }

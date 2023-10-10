@@ -25,6 +25,12 @@ trait QueryRelationTrait
     /** @var IQueryColumn[] */
     public array $availableColumns;
 
+    /**
+     * Constructor
+     *
+     * @param  mixed  ...$args
+     * @return IQueryRelation
+     */
     public function __construct(
         Request $request,
         public string $name,
@@ -34,7 +40,13 @@ trait QueryRelationTrait
         $this->loadProviderWithClassName($request, $providerClass, ...$args);
     }
 
-    protected function loadProviderWithClassName(Request $request, $providerClass, ...$args)
+    /**
+     * Load relation resource provider with request and args
+     *
+     * @param  mixed  ...$args
+     * @return void
+     */
+    protected function loadProviderWithClassName(Request $request, string $providerClass, ...$args)
     {
         /** @var ICrudResourceProvider */
         $this->provider = new $providerClass();
@@ -70,6 +82,12 @@ trait QueryRelationTrait
         return Collection::make($this->availableRelations)->pluck('name')->toArray();
     }
 
+    /**
+     * Validate relation loading data params
+     *
+     *
+     * @throws ValidationException
+     */
     public function validateRelationRequestParams(array $data): array
     {
         return Validator::validate($data, [

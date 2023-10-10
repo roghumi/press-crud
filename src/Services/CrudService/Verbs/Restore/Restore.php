@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use Illuminate\Routing\Route;
 use Illuminate\Validation\ValidationException;
 use Roghumi\Press\Crud\Exceptions\ResourceNotFoundException;
+use Roghumi\Press\Crud\Helpers\UserHelpers;
 use Roghumi\Press\Crud\Services\AccessService\Traits\RBACVerbTrait;
 use Roghumi\Press\Crud\Services\CrudService\ICrudResourceProvider;
 use Roghumi\Press\Crud\Services\CrudService\ICrudVerb;
@@ -15,13 +16,21 @@ class Restore implements ICrudVerb
 {
     use RBACVerbTrait;
 
-    const NAME = 'undo-delete';
+    public const NAME = 'restore';
 
+    /**
+     * Verb name used for RBAC
+     */
     public function getName(): string
     {
         return self::NAME;
     }
 
+    /**
+     * Generate and register a new route based on a crud resource provider
+     *
+     * @param  ICrudResourceProvider  $provider resource provider to use for route generation.
+     */
     public function getRouteForResource(ICrudResourceProvider $provider): Route
     {
         return $this->registerRouteWithControl(
@@ -32,12 +41,14 @@ class Restore implements ICrudVerb
     }
 
     /**
-     * Undocumented function
+     * execute the verbs logic with a provider and request
      *
-     * @throws Exception
-     * @throws ValidationException
+     * @param  Request  $request Incoming request.
+     * @param  ICrudResourceProvider  $provider Resource provider to use.
+     * @param  mixed  ...$args Other Parameters of this verb, defined in route registration function most of the times.
      *
-     * @dispatches CreateEvent
+     * @throws ValidationException Will throw validation exception if request does not comply with verbs compositions.
+     * @throws Exception Other general exceptions.
      */
     public function execRequest(Request $request, ICrudResourceProvider $provider, ...$args): mixed
     {
@@ -73,7 +84,7 @@ class Restore implements ICrudVerb
             },
             // verb dispatch events callback
             function ($model) use ($provider) {
-                RestoreEvent::dispatch(get_class($provider), $model->id, time());
+                RestoreEvent::dispatch(UserHelpers::getAuthUserId(), get_class($provider), $model->id, time());
             },
             // custom composite callback
             null,
@@ -87,7 +98,8 @@ class Restore implements ICrudVerb
     /**
      * Undocumented function
      *
-     * @param  array  $params
+     * @param  Request  $request incoming request
+     * @param  mixed  $params output response from execRequest
      */
     public function getSanitizedOutput(Request $request, mixed $params): array
     {

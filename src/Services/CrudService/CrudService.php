@@ -8,10 +8,9 @@ use Illuminate\Http\Request;
 class CrudService implements ICrudService
 {
     /**
-     * Undocumented function
+     * Register crud routes for a given resource provider
      *
      * @param  array<ICrudResourceProvider>  $providers
-     * @return null
      */
     public function registerCrudRoutes(array $providers): void
     {

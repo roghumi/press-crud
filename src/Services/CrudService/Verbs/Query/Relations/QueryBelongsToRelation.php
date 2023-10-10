@@ -11,7 +11,7 @@ class QueryBelongsToRelation implements IQueryRelation
     use QueryRelationTrait;
 
     /**
-     * Create new instance of this query relation.
+     * static factory method
      *
      * @param  mixed  ...$args
      */

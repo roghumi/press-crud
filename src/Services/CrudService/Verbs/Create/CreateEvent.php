@@ -33,6 +33,9 @@ class CreateEvent implements ShouldQueue
         //
     }
 
+    /**
+     * Get modified resource crud provider.
+     */
     public function getCrudProvider(): ICrudResourceProvider
     {
         if (is_null($this->provider)) {
@@ -43,6 +46,9 @@ class CreateEvent implements ShouldQueue
         return $this->provider;
     }
 
+    /**
+     * Get modified crud resource model.
+     */
     public function getObjectModel(): Model
     {
         return $this
@@ -51,6 +57,9 @@ class CreateEvent implements ShouldQueue
             ->getModel();
     }
 
+    /**
+     * Get user that dispatched this crud event.
+     */
     public function getDispatcher(): IUser
     {
         return UserHelpers::getUserWithId($this->userId);

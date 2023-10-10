@@ -29,18 +29,18 @@ class AccessServiceTest extends TestCase
 
         RoleService::attachPermissionsToRole(2, Permission::all()->pluck('name')->toArray());
         RoleService::attachPermissionsToRole(3, Permission::all()->pluck('name')->toArray());
-        RoleService::detachPermissionsFromRole(3, ['crud.create.domain', 'crud.duplicate.domain']);
+        RoleService::detachPermissionsFromRole(3, ['crud.create.domain', 'crud.clone.domain']);
 
         $this->assertTrue(AccessService::hasAccessToVerb(User::find(2), 'domain', 'create'));
         $this->assertFalse(AccessService::hasAccessToVerb(User::find(3), 'domain', 'create'));
-        $this->assertFalse(AccessService::hasAccessToVerb(User::find(3), 'domain', 'duplicate'));
+        $this->assertFalse(AccessService::hasAccessToVerb(User::find(3), 'domain', 'clone'));
         $this->assertTrue(AccessService::hasAccessToVerb(User::find(3), 'domain', 'update'));
 
         $this->assertFalse(AccessService::hasAccessToVerb(User::find(4), 'domain', 'create'));
-        $this->assertFalse(AccessService::hasAccessToVerb(User::find(4), 'domain', 'duplicate'));
-        RoleService::attachPermissionsToRole(4, ['crud.create.domain', 'crud.duplicate.domain']);
+        $this->assertFalse(AccessService::hasAccessToVerb(User::find(4), 'domain', 'clone'));
+        RoleService::attachPermissionsToRole(4, ['crud.create.domain', 'crud.clone.domain']);
         $this->assertTrue(AccessService::hasAccessToVerb(User::find(4), 'domain', 'create'));
-        $this->assertTrue(AccessService::hasAccessToVerb(User::find(4), 'domain', 'duplicate'));
+        $this->assertTrue(AccessService::hasAccessToVerb(User::find(4), 'domain', 'clone'));
     }
 
     public function test_access_service_routes()

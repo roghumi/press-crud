@@ -4,7 +4,6 @@ namespace Roghumi\Press\Crud\Services\CrudService;
 
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
-use Illuminate\Http\Response;
 
 /**
  * Crud Service.
@@ -15,7 +14,7 @@ interface ICrudService
     /**
      * Register a route for each verb of these resource provider classes.
      *
-     * @param  string[]  $providerClassNames
+     * @param  array<ICrudResourceProvider>  $providerClassNames
      */
     public function registerCrudRoutes(array $providerClassNames): void;
 

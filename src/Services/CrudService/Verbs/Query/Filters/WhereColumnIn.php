@@ -34,7 +34,7 @@ class WhereColumnIn implements IQueryFilter
     }
 
     /**
-     * Apply filter conditions for a value on query builder
+     * Apply filter conditions for a $filterFunction created by this filter on the $query
      */
     public function applyFilter(Closure $filterFunction, Builder $query): Builder
     {

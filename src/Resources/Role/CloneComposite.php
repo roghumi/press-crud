@@ -7,9 +7,9 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Str;
 use Roghumi\Press\Crud\Facades\RoleService;
-use Roghumi\Press\Crud\Services\CrudService\Verbs\Duplicate\IDuplicateVerbComposite;
+use Roghumi\Press\Crud\Services\CrudService\Verbs\Clone\ICloneVerbComposite;
 
-class DuplicateComposite extends UpdateComposite implements IDuplicateVerbComposite
+class CloneComposite extends UpdateComposite implements ICloneVerbComposite
 {
     /**
      * Rules for this verb on resource
@@ -29,40 +29,38 @@ class DuplicateComposite extends UpdateComposite implements IDuplicateVerbCompos
     }
 
     /**
-     * Called just before duplicating a model. sanitized data in
-     * crud verb composite is used to create a model, now one can
-     * access this model and make necessary changes before duplicates
-     * are stored in database. return a list of duplicate ready models
+     * Called just before cloning a model. sanitized data in crud verb composite is used
+     * to create a model, now one can access this model and make necessary changes before
+     * clones are stored in database. return a list of clone ready models.
      *
      * @param  Request  $request incoming request.
      * @param  Model  $source source model that is used for duplicating.
      * @param  Collection  $targets Array of target objects created and ready to be stored in database.
-     * @param  mixed  ...$args incoming route args.
+     * @param  array  ...$args incoming route args.
      *
      * @throws Exception
      */
-    public function onBeforeDuplicate(Request $request, Model $source, Collection $targets, ...$args): void
+    public function onBeforeClone(Request $request, Model $source, Collection $targets, ...$args): void
     {
         foreach ($targets as $target) {
-            $target->name = Str::random(8) . '-' . $request->get('name', $source->name);
+            $target->name = Str::random(8).'-'.$request->get('name', $source->name);
         }
     }
 
     /**
-     * Called after a model is successfully duplicated in database.
-     * ne can use this composite callback to
-     * complete a request relation connections and more.
+     * Called after a model is successfully cloned in database, then we
+     * can use this composite callback to complete a request relation connections and more.
      *
      * @param  Request  $request incoming request.
      * @param  Model  $source source model that is used for duplicating.
      * @param  Collection  $targets Array of target objects created and stored in database.
-     * @param  mixed  ...$args incoming route args.
+     * @param  array  ...$args incoming route args.
      *
      * @throws Exception
      */
-    public function onAfterDuplicate(Request $request, Model $source, Collection $targets, ...$args): void
+    public function onAfterClone(Request $request, Model $source, Collection $targets, ...$args): void
     {
-        // sync role permissions for duplicated item
+        // sync role permissions for cloned item
         $sourcePermissionNames = $source->getPermissionNames()->toArray();
         foreach ($targets as $target) {
             RoleService::syncRolePermissions($target->id, $sourcePermissionNames);

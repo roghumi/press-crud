@@ -1,29 +1,27 @@
 <?php
 
-namespace Roghumi\Press\Crud\Services\CrudService\Verbs\Duplicate;
+namespace Roghumi\Press\Crud\Services\CrudService\Verbs\Clone;
 
 use Exception;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Route;
 use Illuminate\Support\Collection;
-use Illuminate\Support\Facades\Auth;
 use Illuminate\Validation\ValidationException;
 use Roghumi\Press\Crud\Exceptions\ResourceNotFoundException;
-use Roghumi\Press\Crud\Resources\Domain\DuplicateComposite;
+use Roghumi\Press\Crud\Helpers\UserHelpers;
 use Roghumi\Press\Crud\Services\AccessService\Traits\RBACVerbTrait;
 use Roghumi\Press\Crud\Services\CrudService\ICrudResourceProvider;
 use Roghumi\Press\Crud\Services\CrudService\ICrudVerb;
 
 /**
- * Duplicate verb class.
- * Duplicates any kind of resource with a given ICrudResourceProvider
+ * Clone any kind of resource with a given ICrudResourceProvider.
  */
-class Duplicate implements ICrudVerb
+class CloneVerb implements ICrudVerb
 {
     use RBACVerbTrait;
 
-    public const NAME = 'duplicate';
+    public const NAME = 'clone';
 
     /**
      * Verb name used for RBAC
@@ -35,9 +33,9 @@ class Duplicate implements ICrudVerb
 
     /**
      * Register a route corresponding this verb on a provided resource provider.
-     * Duplicate route params:
+     * Clone route params:
      *  index[0] = source record id
-     *  index[1] = count of duplicates (optional)
+     *  index[1] = count of clones (optional, defaults to 1)
      *
      * @param  ICrudResourceProvider  $provider resource provider to use for route generation.
      */
@@ -50,22 +48,19 @@ class Duplicate implements ICrudVerb
              * {id} is request index 0 arg
              * {count} is request index 1 arg
              */
-            sprintf('%s/{id}/duplicate/{count?}', $provider->getName())
+            sprintf('%s/{id}/clone/{count?}', $provider->getName())
         )->where('count', '[0-9]+');
     }
 
     /**
-     * Execute verb based on request and resource provider
-     * you must enter valid $args as they are defined by getRouteForResource
+     * execute the verbs logic with a provider and request
      *
      * @param  Request  $request Incoming request.
      * @param  ICrudResourceProvider  $provider Resource provider to use.
      * @param  mixed  ...$args Other Parameters of this verb, defined in route registration function most of the times.
      *
-     * @throws Exception
-     * @throws ValidationException
-     *
-     * @dispatches DeleteEvent
+     * @throws ValidationException Will throw validation exception if request does not comply with verbs compositions.
+     * @throws Exception Other general exceptions.
      */
     public function execRequest(Request $request, ICrudResourceProvider $provider, ...$args): mixed
     {
@@ -78,7 +73,7 @@ class Duplicate implements ICrudVerb
                 $modelId = $args[0]; // arg 0 = model id
                 $count = 1;
                 if (isset($args[1])) {
-                    $count = $args[1]; // optional arg 1 = duplicate count
+                    $count = $args[1]; // optional arg 1 = clone count
                 }
 
                 $source = $provider->getObjectById($modelId)?->getModel();
@@ -95,8 +90,8 @@ class Duplicate implements ICrudVerb
                 }
 
                 foreach ($verbCompositions as $verbComposition) {
-                    if ($verbComposition instanceof DuplicateComposite) {
-                        $verbComposition->onBeforeDuplicate($request, $source, $targets, ...$args);
+                    if ($verbComposition instanceof ICloneVerbComposite) {
+                        $verbComposition->onBeforeClone($request, $source, $targets, ...$args);
                     }
                 }
 
@@ -106,8 +101,8 @@ class Duplicate implements ICrudVerb
                 }
 
                 foreach ($verbCompositions as $verbComposition) {
-                    if ($verbComposition instanceof DuplicateComposite) {
-                        $verbComposition->onAfterDuplicate($request, $source, $targets, ...$args);
+                    if ($verbComposition instanceof ICloneVerbComposite) {
+                        $verbComposition->onAfterClone($request, $source, $targets, ...$args);
                     }
                 }
 
@@ -118,13 +113,13 @@ class Duplicate implements ICrudVerb
                 /** @var Model */
                 $source = $result[0];
                 /** @var Collection */
-                $duplicates = $result[1];
+                $clones = $result[1];
 
-                DuplicateEvent::dispatch(
-                    Auth::user()?->id ?? null,
+                CloneEvent::dispatch(
+                    UserHelpers::getAuthUserId(),
                     get_class($provider),
                     $source->id,
-                    $duplicates->pluck('id')->toArray(),
+                    $clones->pluck('id')->toArray(),
                     time()
                 );
             },
@@ -151,14 +146,14 @@ class Duplicate implements ICrudVerb
         /** @var Model */
         $source = $execResult[0];
         /** @var Collection */
-        $duplicates = $execResult[1];
+        $clones = $execResult[1];
 
         return [
-            'message' => trans('press.crud.verbs.duplicate.success', [
+            'message' => trans('press.crud.verbs.clone.success', [
                 'sourceId' => $source->id,
-                'duplicateId' => $duplicates->pluck('id')->join(','),
+                'cloneIds' => $clones->pluck('id')->join(','),
             ]),
-            'items' => $duplicates->toArray(),
+            'items' => $clones->toArray(),
         ];
     }
 }

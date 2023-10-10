@@ -10,6 +10,11 @@ class QueryHasManyRelation implements IQueryRelation
 {
     use QueryRelationTrait;
 
+    /**
+     * static factory method
+     *
+     * @param  mixed  ...$args
+     */
     public static function create(string $name, string $providerClass, Request $request, ...$args): IQueryRelation
     {
         return new QueryHasManyRelation($request, $name, $providerClass, ...$args);

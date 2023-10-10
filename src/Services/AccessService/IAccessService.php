@@ -62,9 +62,6 @@ interface IAccessService
 
     /**
      * Get resource provider associated with this route.
-     *
-     *
-     * @return ICrudResourceProvider
      */
     public function getProviderFromRoute(Route $route): ?ICrudResourceProvider;
 

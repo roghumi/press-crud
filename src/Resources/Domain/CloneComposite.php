@@ -7,9 +7,9 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Str;
 use Roghumi\Press\Crud\Facades\DomainService;
-use Roghumi\Press\Crud\Services\CrudService\Verbs\Duplicate\IDuplicateVerbComposite;
+use Roghumi\Press\Crud\Services\CrudService\Verbs\Clone\ICloneVerbComposite;
 
-class DuplicateComposite extends UpdateComposite implements IDuplicateVerbComposite
+class CloneComposite extends UpdateComposite implements ICloneVerbComposite
 {
     /**
      * Rules for this verb on resource.
@@ -29,7 +29,7 @@ class DuplicateComposite extends UpdateComposite implements IDuplicateVerbCompos
     }
 
     /**
-     * Before duplicating domains, prefix duplicated domains with a
+     * Before cloning domains, prefix cloned domains with a
      *  random generated string.
      *
      * @param  Request  $request incoming request.
@@ -39,15 +39,15 @@ class DuplicateComposite extends UpdateComposite implements IDuplicateVerbCompos
      *
      * @throws Exception
      */
-    public function onBeforeDuplicate(Request $request, Model $source, Collection $targets, ...$args): void
+    public function onBeforeClone(Request $request, Model $source, Collection $targets, ...$args): void
     {
         foreach ($targets as $target) {
-            $target->name = Str::random(8) . '.' . $request->get('name', $source->name);
+            $target->name = Str::random(8).'.'.$request->get('name', $source->name);
         }
     }
 
     /**
-     * After duplicating, position duplicates on same parent as source domain.
+     * After cloning, position clones on same parent as source domain.
      *
      * @param  Request  $request incoming request.
      * @param  Model  $source source model that is used for duplicating.
@@ -56,7 +56,7 @@ class DuplicateComposite extends UpdateComposite implements IDuplicateVerbCompos
      *
      * @throws Exception
      */
-    public function onAfterDuplicate(Request $request, Model $source, Collection $targets, ...$args): void
+    public function onAfterClone(Request $request, Model $source, Collection $targets, ...$args): void
     {
         $sourceParentId = DomainService::getFirstParentId($source->id);
         if (! is_null($sourceParentId)) {

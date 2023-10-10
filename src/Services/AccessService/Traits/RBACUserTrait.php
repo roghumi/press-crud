@@ -10,8 +10,8 @@ use Roghumi\Press\Crud\Resources\Role\Role;
 use Roghumi\Press\Crud\Services\AccessService\IAccessRole;
 
 /**
- *  A trait for building standard RBAC user
- *      use this in your laravel applications User class
+ * A trait for building standard RBAC user
+ * use this in your laravel applications User class.
  */
 trait RBACUserTrait
 {
@@ -24,7 +24,7 @@ trait RBACUserTrait
     }
 
     /**
-     * Undocumented function
+     * User roles
      *
      * @return Collection<IAccessRole>
      */
@@ -34,7 +34,7 @@ trait RBACUserTrait
     }
 
     /**
-     * Undocumented function
+     * User groups
      *
      * @return Collection<IAccessGroup>
      */
@@ -44,7 +44,7 @@ trait RBACUserTrait
     }
 
     /**
-     * Undocumented function
+     * User top role
      */
     public function getTopRole(): ?IAccessRole
     {
@@ -52,7 +52,7 @@ trait RBACUserTrait
     }
 
     /**
-     * Undocumented function
+     * User permission names
      *
      * @return Collection<string>
      */
@@ -62,7 +62,7 @@ trait RBACUserTrait
     }
 
     /**
-     * Undocumented function
+     * Get domains which user is a manager in
      *
      * @return Collection<IAccessDomain>
      */

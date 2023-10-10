@@ -5,9 +5,9 @@ namespace Roghumi\Press\Crud\Resources\Role;
 use Illuminate\Database\Eloquent\Model;
 use Roghumi\Press\Crud\Services\CrudService\ICrudResource;
 use Roghumi\Press\Crud\Services\CrudService\ICrudResourceProvider;
+use Roghumi\Press\Crud\Services\CrudService\Verbs\Clone\CloneVerb;
 use Roghumi\Press\Crud\Services\CrudService\Verbs\Create\Create;
 use Roghumi\Press\Crud\Services\CrudService\Verbs\Delete\Delete;
-use Roghumi\Press\Crud\Services\CrudService\Verbs\Duplicate\Duplicate;
 use Roghumi\Press\Crud\Services\CrudService\Verbs\Export\Export;
 use Roghumi\Press\Crud\Services\CrudService\Verbs\Query\Query;
 use Roghumi\Press\Crud\Services\CrudService\Verbs\Restore\Restore;
@@ -20,7 +20,7 @@ use Roghumi\Press\Crud\Services\CrudService\Verbs\Update\Update;
 class RoleProvider implements ICrudResourceProvider
 {
     /**
-     *  get a unique name for this resource
+     * get a unique name for this resource
      */
     public function getName(): string
     {
@@ -46,7 +46,7 @@ class RoleProvider implements ICrudResourceProvider
     }
 
     /**
-     * Generate a new resource based on the data that can be stored later
+     * Generate a new resource based on the data that can be stored latish
      */
     public function generateModelFromData(array $data): ?Model
     {
@@ -54,7 +54,8 @@ class RoleProvider implements ICrudResourceProvider
     }
 
     /**
-     * Verb composition map
+     * Get a map of available verbs (ICrudVerb interface unique names)
+     *  to list of that verb compositions for this resource
      */
     public function getAvailableVerbAndCompositions(): array
     {
@@ -71,8 +72,8 @@ class RoleProvider implements ICrudResourceProvider
             Export::NAME => [
                 QueryComposite::class,
             ],
-            Duplicate::NAME => [
-                DuplicateComposite::class,
+            CloneVerb::NAME => [
+                CloneComposite::class,
             ],
             Delete::NAME => [],
             Restore::NAME => [],

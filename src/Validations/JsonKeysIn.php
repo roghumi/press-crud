@@ -16,9 +16,6 @@ class JsonKeysIn implements ValidationRule
     ) {
     }
 
-    /**
-     * Run the validation rule.
-     */
     public function validate(string $attribute, mixed $value, Closure $fail): void
     {
         if (is_array($value)) {

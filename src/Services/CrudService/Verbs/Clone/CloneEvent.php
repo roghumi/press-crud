@@ -1,35 +1,34 @@
 <?php
 
-namespace Roghumi\Press\Crud\Services\CrudService\Verbs\Duplicate;
+namespace Roghumi\Press\Crud\Services\CrudService\Verbs\Clone;
 
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Foundation\Events\Dispatchable;
 use Illuminate\Queue\SerializesModels;
 use Illuminate\Support\Collection;
+use Roghumi\Press\Crud\Helpers\UserHelpers;
+use Roghumi\Press\Crud\Services\AccessService\IUser;
 use Roghumi\Press\Crud\Services\CrudService\ICrudResourceProvider;
 
-class DuplicateEvent implements ShouldQueue
+class CloneEvent implements ShouldQueue
 {
     use Dispatchable;
     use SerializesModels;
 
-    /**
-     * Duplicate new event instance.
-     *
-     *
-     * @return DeleteEvent
-     */
     public function __construct(
         public int|string $userId,
         public string $providerClass,
         public int|string $sourceId,
-        public array $duplicateIds,
+        public array $clonedIds,
         public int $timestamp
     ) {
         //
     }
 
+    /**
+     * Get modified resource crud provider.
+     */
     public function getCrudProvider(): ICrudResourceProvider
     {
         $class = $this->providerClass;
@@ -37,6 +36,9 @@ class DuplicateEvent implements ShouldQueue
         return new $class();
     }
 
+    /**
+     * Get modified crud resource model.
+     */
     public function getSourceModel(): Model
     {
         return $this
@@ -45,8 +47,19 @@ class DuplicateEvent implements ShouldQueue
             ->getModel();
     }
 
-    public function getDuplicatedModelIds(): Collection
+    /**
+     * Get cloned model ids
+     */
+    public function getClonedModelIds(): Collection
     {
-        return new Collection($this->duplicateIds);
+        return new Collection($this->clonedIds);
+    }
+
+    /**
+     * Get user that dispatched this crud event.
+     */
+    public function getDispatcher(): IUser
+    {
+        return UserHelpers::getUserWithId($this->userId);
     }
 }

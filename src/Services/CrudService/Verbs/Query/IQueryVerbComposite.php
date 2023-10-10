@@ -34,6 +34,7 @@ interface IQueryVerbComposite extends ICrudVerbComposite
      * verb execution is reached.
      *
      * @param  Request  $request incoming request
+     * @param  array  $compositeFilters composition values
      * @param  mixed  ...$args
      * @return array<IQueryFilter>
      */

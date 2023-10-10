@@ -37,6 +37,7 @@ class UpdateComposite implements IUpdateVerbComposite
      * @param  Request  $request incoming request.
      * @param  array  $compositeData composition data chained to this composite.
      * @param  mixed  ...$args incoming route args.
+     * @return void
      */
     public function getSanitized(Request $request, array $compositeData, ...$args): array
     {

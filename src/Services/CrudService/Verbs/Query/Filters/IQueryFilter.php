@@ -26,6 +26,7 @@ interface IQueryFilter
     /**
      * Validate request params for applying this filter
      *
+     *
      * @throws ValidationException
      */
     public function validateFilterRequestParams(array $data): array;

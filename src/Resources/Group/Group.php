@@ -5,7 +5,6 @@ namespace Roghumi\Press\Crud\Resources\Group;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Roghumi\Press\Crud\Database\Factories\GroupFactory;
 use Roghumi\Press\Crud\Services\AccessService\IUser;
@@ -48,57 +47,6 @@ class Group extends Model implements ICrudResource
     protected static function newFactory(): Factory
     {
         return GroupFactory::new();
-    }
-
-    /**
-     * Undocumented function
-     *
-     * @return HasOne
-     */
-    public function author()
-    {
-        return $this->hasOne(config('press.crud.user.class'), 'author_id');
-    }
-
-    public function ancestors()
-    {
-        return $this->hasManyThrough(
-            Group::class,
-            GroupHierarchy::class,
-            'parent_id',
-            'child_id',
-            'id',
-            'id',
-        );
-    }
-
-    public function subtree()
-    {
-        return $this->hasManyThrough(
-            Group::class,
-            GroupHierarchy::class,
-            'child_id',
-            'parent_id',
-            'id',
-            'id',
-        );
-    }
-
-    public function children()
-    {
-        return $this->hasMany(
-            Group::class,
-            'parent_id',
-            'id',
-        );
-    }
-
-    public function parent()
-    {
-        return $this->belongsTo(
-            Group::class,
-            'parent_id',
-        );
     }
 
     /**

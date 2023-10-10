@@ -10,10 +10,11 @@
 * Run tests
     * ``docker compose run -it phpcli phpunit``
 * Lint code
-    * ``docker compose run -it phpcli pint``
-    * ``docker compose run -it phpcli phpcs``
-    * ``docker compose run -it phpcli phpcs --report=diff``
-    * ``docker compose run -it phpcli phpcbf``
+    * Check Laravel pint test output: ``docker compose run -it phpcli pint --test``
+    * Check phpcs diff report: ``docker compose run -it phpcli phpcs --report=diff``
+    * Fix with phpcbf: ``docker compose run -it phpcli phpcbf``
+    * Check with phpcs: ``docker compose run -it phpcli phpcs``
+    * Fix with pint on dirty (uncommitted) files: ``docker compose run -it phpcli pint --dirty``
 * Create a pull request
 
 ## Development environment for VSCode setup guid
@@ -62,7 +63,6 @@
 * PHP Intelephense
 * Laravel Snippets
 * Laravel Extra Intellisense
-
 
 ## Development Environment Info
 * Docker 23.0.3

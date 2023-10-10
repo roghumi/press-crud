@@ -8,8 +8,8 @@ return [
         'update' => [
             'success' => 'Successfully updated record with id :recordId.',
         ],
-        'duplicate' => [
-            'success' => 'Successfully duplicated record with id :sourceId into new a record with id :duplicateId.',
+        'clone' => [
+            'success' => 'Successfully cloned record with id :sourceId into new records with ids :cloneIds.',
         ],
         'delete' => [
             'success' => 'Successfully deleted record with id :recordId.',

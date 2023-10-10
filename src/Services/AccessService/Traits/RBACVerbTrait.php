@@ -122,7 +122,7 @@ trait RBACVerbTrait
             $methods,
             $url,
             array_merge(AccessService::getCrudRouteMetadata($this, $provider), [
-                'uses' => self::class . '@executeVerbFromRoute',
+                'uses' => self::class.'@executeVerbFromRoute',
             ])
         )->name($name);
     }

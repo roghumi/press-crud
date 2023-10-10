@@ -7,12 +7,21 @@ use Illuminate\Http\Request;
 
 class QueryColumn implements IQueryColumn
 {
+    /**
+     * @return QueryColumn
+     */
     public function __construct(
         public string $name,
         public bool $sortable,
     ) {
     }
 
+    /**
+     * Create new column model
+     *
+     *
+     * @return QueryColumn
+     */
     public static function create(string $name, bool $sortable)
     {
         return new QueryColumn($name, $sortable);
@@ -28,6 +37,8 @@ class QueryColumn implements IQueryColumn
 
     /**
      * Return if this column can be sorted for a given request and args
+     *
+     * @param  mixed  ...$args
      */
     public function isSortable(Request $request, ...$args): bool
     {
@@ -37,7 +48,7 @@ class QueryColumn implements IQueryColumn
     /**
      * Add sorting to the query on this column
      */
-    public function sortQueryOnColumn(Builder $query, $direction): void
+    public function sortQueryOnColumn(Builder $query, string $direction): void
     {
         $query->orderBy($this->name, $direction === 'asc' ? 'ASC' : 'DESC');
     }

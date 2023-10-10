@@ -130,7 +130,6 @@ class HierarchyHelpers
     /**
      * Remove hierarchy id from parent, and make it a root item
      *
-     *
      * @return void
      */
     public static function removeHierarchyFromParent(int|string $itemId, string $table)
@@ -157,7 +156,6 @@ class HierarchyHelpers
 
     /**
      * Remove hierarchy id from parent, and make it a root item
-     *
      *
      * @return void
      */
@@ -197,6 +195,7 @@ class HierarchyHelpers
     /**
      * Get a list of a hierarchy item descendant ids
      *
+     *
      * @return Collection<int|string>
      */
     public static function getChildHierarchyIds(int|string $itemId, string $table): Collection
@@ -227,8 +226,6 @@ class HierarchyHelpers
 
     /**
      * Get parent id for hierarchy item if exists.
-     *
-     * @param  int|string  $hierarchyId
      */
     public static function getFirstParentHierarchyId(int|string $itemId, string $table): int|string|null
     {

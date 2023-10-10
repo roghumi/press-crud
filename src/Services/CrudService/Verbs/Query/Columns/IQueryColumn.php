@@ -14,11 +14,13 @@ interface IQueryColumn
 
     /**
      * Return if this column can be sorted for a given request and args
+     *
+     * @param  mixed  ...$args
      */
     public function isSortable(Request $request, ...$args): bool;
 
     /**
      * Add sorting to the query on this column
      */
-    public function sortQueryOnColumn(Builder $query, $direction): void;
+    public function sortQueryOnColumn(Builder $query, string $direction): void;
 }

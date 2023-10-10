@@ -18,7 +18,6 @@ class PressCrudServiceProvider extends ServiceProvider
 {
     use MigrationPublishTrait;
 
-    /** @phpcs:ignore Squiz.Commenting.FunctionComment */
     public function register()
     {
         $this->app->bind(IAccessService::class, AccessService::class);
@@ -27,21 +26,20 @@ class PressCrudServiceProvider extends ServiceProvider
         $this->app->bind(IDomainService::class, DomainService::class);
     }
 
-    /** @phpcs:ignore Squiz.Commenting.FunctionComment */
     public function boot()
     {
-        $this->mergeConfigFrom(__DIR__ . '/../../config/press/crud.php', 'press.crud');
-        $this->loadRoutesFrom(__DIR__ . '/../../routes/crud.php');
-        $this->loadTranslationsFrom(__DIR__ . '/../../lang/', 'press.crud');
+        $this->mergeConfigFrom(__DIR__.'/../../config/press/crud.php', 'press.crud');
+        $this->loadRoutesFrom(__DIR__.'/../../routes/crud.php');
+        $this->loadTranslationsFrom(__DIR__.'/../../lang/', 'press.crud');
 
         if ($this->app->runningInConsole()) {
             $this->publishes([
-                __DIR__ . '/../../config/press/crud.php' => config_path('press/crud.php'),
+                __DIR__.'/../../config/press/crud.php' => config_path('press/crud.php'),
             ], 'config');
 
-            $this->publishMigrations(__DIR__ . '/../../database/migrations');
+            $this->publishMigrations(__DIR__.'/../../database/migrations');
             if ($this->app->runningUnitTests()) {
-                $this->loadMigrationsFrom(__DIR__ . '/../../database/migrations');
+                $this->loadMigrationsFrom(__DIR__.'/../../database/migrations');
             }
 
             $this->commands([

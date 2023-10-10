@@ -26,7 +26,7 @@ class UpdateComposite implements IUpdateVerbComposite
 
         return array_merge($compositeRules, [
             'name' => ['string', 'max:64', Rule::unique(Domain::class)->ignore($args[0])],
-            'options' => 'nullable|min:0|int|max:' . ($user?->getTopRole()?->getOptionsLevel() ?? 0),
+            'options' => 'nullable|min:0|int|max:'.($user?->getTopRole()?->getOptionsLevel() ?? 0),
             'permissions' => 'nullable|array',
             'permissions.*' => 'string|exists:permissions,name',
         ]);
@@ -78,7 +78,7 @@ class UpdateComposite implements IUpdateVerbComposite
      */
     public function onAfterUpdate(Request $request, Model $resource, ...$args): void
     {
-        // sync roles for duplicated item
+        // sync roles for cloned item
         RoleService::syncRolePermissions($resource->id, $request->get('permissions', []));
     }
 }

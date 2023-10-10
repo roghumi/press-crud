@@ -32,6 +32,7 @@ class QueryComposite implements ICrudVerbComposite, IQueryVerbComposite
      * verb execution is reached.
      *
      * @param  Request  $request incoming request
+     * @param  array  $compositeColumns composition values
      * @param  mixed  ...$args
      * @return array<IQueryColumn>
      */
@@ -53,6 +54,7 @@ class QueryComposite implements ICrudVerbComposite, IQueryVerbComposite
      * verb execution is reached.
      *
      * @param  Request  $request incoming request
+     * @param  array  $compositeFilters composition values
      * @param  mixed  ...$args
      * @return array<IQueryFilter>
      */

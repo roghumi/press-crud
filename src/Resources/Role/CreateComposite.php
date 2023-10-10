@@ -12,7 +12,7 @@ use Roghumi\Press\Crud\Services\CrudService\Verbs\Create\ICreateVerbComposite;
 class CreateComposite implements ICreateVerbComposite
 {
     /**
-     * Rules for this verb on resource
+     * Rules for domain creation
      *
      * @param  Request  $request incoming request
      * @param  array  $compositeRules Rules from other registered relevant compositions.
@@ -25,7 +25,7 @@ class CreateComposite implements ICreateVerbComposite
 
         return array_merge($compositeRules, [
             'name' => 'string|required|max:64|unique:roles,name',
-            'options' => 'nullable|min:0|int|max:' . ($user?->getTopRole()?->getOptionsLevel() ?? 0),
+            'options' => 'nullable|min:0|int|max:'.($user?->getTopRole()?->getOptionsLevel() ?? 0),
             'permissions' => 'nullable|array',
             'permissions.*' => 'string|exists:permissions,name',
         ]);

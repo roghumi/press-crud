@@ -37,7 +37,7 @@ trait QueryCompositeTrait
             'filters' => ['nullable', 'array'],
             'relations' => ['nullable', 'array'],
             'sortBy' => ['nullable', 'array'],
-            'perPage' => 'nullable|numeric|min:1|max:' . config('press.crud.query.maxPerPage'),
+            'perPage' => 'nullable|numeric|min:1|max:'.config('press.crud.query.maxPerPage'),
             'page' => 'nullable|numeric|min:0',
         ]);
     }
