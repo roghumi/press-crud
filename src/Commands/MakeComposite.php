@@ -46,7 +46,7 @@ class MakeComposite extends Command
         if ($def && is_array($def)) {
             $resourceDotPHP = $outputDir . $def['resource'] . '.php';
 
-            dd($twig->render('resource.php.twig', $def));
+            dd($twig->render('CreateComposite.php.twig', $def));
             if (!file_exists($resourceDotPHP)) {
                 file_put_contents(
                     $resourceDotPHP,

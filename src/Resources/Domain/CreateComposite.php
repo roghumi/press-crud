@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Roghumi\Press\Crud\Facades\DomainService;
+use Roghumi\Press\Crud\Helpers\UserHelpers;
 use Roghumi\Press\Crud\Services\CrudService\Verbs\Create\ICreateVerbComposite;
 
 /**
@@ -40,7 +41,7 @@ class CreateComposite implements ICreateVerbComposite
     {
         return array_merge($data, [
             'name' => $request->get('name', null),
-            'author_id' => Auth::id(),
+            'author_id' => UserHelpers::getAuthUserId(),
             'data' => json_decode($request->get('data', null)),
         ]);
     }

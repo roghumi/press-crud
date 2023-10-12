@@ -1,9 +1,9 @@
 #
 # LaraPress resource definition.
 #
-resource: Group
-provider: GroupProvider
-namespace: Roghumi\Press\Crud\Resources\Group
+resource: PhoneNumber
+provider: PhoneNumberProvider
+namespace: Roghumi\Press\Profiles\Resources\PhoneNumber
 timestamps: true
 softDeletes: true
 hasFactory: true
@@ -18,10 +18,6 @@ verbs:
   - verb: Query
     comp: QueryComposition
   - verb: Export
-    comp: ExportComposition
-  - verb: Clone
-    comp: CloneComposition
-  - verb: Export
   - verb: Delete
   - verb: Restore
 
@@ -33,21 +29,21 @@ columns:
     filters:
       - equals
       - between
-  - name: name
+  - name: number
     type: string
     sort: true
     rules:
       - string
       - required
-      - unique: groups,name
+      - unique: groups,number
         update: exclude
     filters:
       - equals
       - contains
-  - name: author_id
+  - name: user_id
     type: string
     sort: true
-    input: auth_id
+    rules: 'string|exists:users,id'
     filters:
       - equals
       - between
@@ -59,7 +55,7 @@ columns:
       - equals
 
 relations:
-  - name: author
+  - name: user
     type: BelongsTo
     provider: user.provider
     class: user.class

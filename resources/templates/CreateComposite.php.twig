@@ -6,9 +6,11 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Roghumi\Press\Crud\Services\CrudService\Verbs\Create\ICreateVerbComposite;
+use Roghumi\Press\Crud\Helpers\UserHelpers;
 
 /**
  * {{ resource }} creation base composite class.
+ * Define rules, sanitizations and before, after create hooks.
  */
 class CreateComposite implements ICreateVerbComposite
 {
@@ -40,11 +42,18 @@ class CreateComposite implements ICreateVerbComposite
     public function getSanitized(Request $request, array $data, ...$args): array
     {
         return array_merge($data, [
+        {% for cl in columns %}
+            {% if cl.input == 'auth_id' %}
+            '{{ cl.name }}' => UserHelpers::getAuthUserId(),
+            {% elseif not cl.input is same as false %}
+            '{{ cl.name }}' => $request->get('{{ cl.name }}', null),
+            {% endif %}
+        {% endfor %}
         ]);
     }
 
     /**
-     * Before domain creation
+     * Callback hook before resource is created
      *
      * @param  Request  $request incoming request
      * @param  Model  $resource model that will be created
@@ -57,8 +66,7 @@ class CreateComposite implements ICreateVerbComposite
     }
 
     /**
-     * After domain created:
-     *  * update domain position in hierarchy based on request parentId parameter
+     * Callback hook after resource created
      *
      * @param  Request  $request incoming request
      * @param  Model  $resource newly created model
