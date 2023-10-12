@@ -6,6 +6,7 @@ provider: GroupProvider
 namespace: Roghumi\Press\Crud\Resources\Group
 timestamps: true
 softDeletes: true
+hasFactory: true
 ignoreFiles:
   - resource
 

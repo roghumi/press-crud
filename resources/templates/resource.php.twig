@@ -1,15 +1,18 @@
+<?php
+
 namespace {{ namespace }};
 
-{% if factory %}
+{% if hasFactory %}
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Roghumi\Press\Crud\Database\Factories\GroupFactory;
+use Roghumi\Press\Crud\Database\Factories\{{ resource }}Factory;
 {% endif %}
-use Illuminate\Database\Eloquent\Model;
+
 {% if softDeletes %}
 use Illuminate\Database\Eloquent\SoftDeletes;
 {% endif %}
 
+use Illuminate\Database\Eloquent\Model;
 use Roghumi\Press\Crud\Services\AccessService\IUser;
 use Roghumi\Press\Crud\Services\CrudService\ICrudResource;
 
@@ -31,7 +34,7 @@ use Roghumi\Press\Crud\Services\CrudService\ICrudResource;
  */
 class {{ resource }} extends Model implements ICrudResource
 {
-{% if factory %}
+{% if hasFactory %}
     use HasFactory;
 {% endif %}
 {% if softDeletes %}
@@ -46,10 +49,10 @@ class {{ resource }} extends Model implements ICrudResource
 {% endfor %}
     ];
 
-{% if factory %}
+{% if hasFactory %}
     protected static function newFactory(): Factory
     {
-        return GroupFactory::new();
+        return {{ resource }}Factory::new();
     }
 {% endif %}
 
