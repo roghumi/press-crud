@@ -5,11 +5,11 @@ namespace {{ namespace }};
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
- * @extends \Illuminate\Database\Eloquent\Factories\Factory<{{ resource }}>
+ * @extends \Illuminate\Database\Eloquent\Factories\Factory<{{ resource | ucFirst }}>
  */
-class {{ resource }}Factory extends Factory
+class {{ resource | ucFirst }}Factory extends Factory
 {
-    protected $model = {{ resource }}::class;
+    protected $model = {{ resource | ucFirst }}::class;
 
     /**
      * Define the model's default state.
@@ -20,7 +20,9 @@ class {{ resource }}Factory extends Factory
     {
         return [
             {% for cl in columns %}
-            
+            {% if cl.faker %}
+            '{{ cl.name }}' => {{ cl.faker | fakerEval | raw }},
+            {% endif %}
             {% endfor %}
         ];
     }

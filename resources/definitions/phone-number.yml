@@ -43,7 +43,7 @@ columns:
   - name: user_id
     type: string
     sort: true
-    rules: 'string|exists:users,id'
+    rules: string|exists:users,id
     filters:
       - equals
       - between

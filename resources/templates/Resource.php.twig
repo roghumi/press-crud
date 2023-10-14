@@ -2,10 +2,12 @@
 
 namespace {{ namespace }};
 
-{% if hasFactory %}
+{% if factory %}
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Roghumi\Press\Crud\Database\Factories\{{ resource }}Factory;
+{% if not factory is same as false and factory.namespace %}
+use {{ factory.namespace }}\{{ resource | ucFirst }}Factory;
+{% endif %}
 {% endif %}
 
 {% if softDeletes %}
@@ -13,14 +15,13 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 {% endif %}
 
 use Illuminate\Database\Eloquent\Model;
+{{ relationsUsedClasses(relations) }}
 use Roghumi\Press\Crud\Services\AccessService\IUser;
 use Roghumi\Press\Crud\Services\CrudService\ICrudResource;
 
 /**
- * {{ resource }} Model
- *
- * @resource
- *
+ * {{ resource | ucFirst }} Model
+ * {{ doc }}
 {% if timestamps %}
  * @property \Carbon\Carbon $created_at
  * @property \Carbon\Carbon $updated_at
@@ -34,7 +35,7 @@ use Roghumi\Press\Crud\Services\CrudService\ICrudResource;
  */
 class {{ resource }} extends Model implements ICrudResource
 {
-{% if hasFactory %}
+{% if factory %}
     use HasFactory;
 {% endif %}
 {% if softDeletes %}
@@ -49,10 +50,10 @@ class {{ resource }} extends Model implements ICrudResource
 {% endfor %}
     ];
 
-{% if hasFactory %}
+{% if factory %}
     protected static function newFactory(): Factory
     {
-        return {{ resource }}Factory::new();
+        return {{ resource | ucFirst }}Factory::new();
     }
 {% endif %}
 
@@ -63,4 +64,16 @@ class {{ resource }} extends Model implements ICrudResource
     {
         return $this;
     }
+
+    {% for relation in relations %}
+    /**
+    * {{ relation.name | ucFirst }} relation.
+    * {{ relation.doc }}
+    * @return {{ relation.type | ucFirst }}
+    */
+    public function {{ relation.name | camelCase }}()
+    {
+        return $this->{{ relation.type | camelCase }}({{ relation.class | relationClass | raw }}, ...{{ relation.props | json_encode | raw }});
+    }
+    {% endfor %}
 }

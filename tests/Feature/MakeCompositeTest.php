@@ -12,9 +12,7 @@ class MakeCompositeTest extends TestCase
     public function test_make_composite_command()
     {
         $this->artisan('make:composite', [
-            'def' => __DIR__.'/../../resources/definitions/group.yml',
-            'output-dir' => __DIR__.'/../../src/Resources/Group/',
-
+            'def-file' => __DIR__.'/../../resources/definitions/group.yml',
         ])->assertOk();
     }
 }

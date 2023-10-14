@@ -1,14 +1,18 @@
 <?php
 
-namespace Roghumi\Press\Crud\Resources\Domain;
+namespace {{ namespace }};
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Http\Request;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Str;
-use Roghumi\Press\Crud\Facades\DomainService;
+use Illuminate\Validation\Rule;
 use Roghumi\Press\Crud\Services\CrudService\Verbs\Clone\ICloneVerbComposite;
 
+/**
+ * {{ resource | ucFirst }} clone composite class.
+ * Define rules, sanitizations and before, after update hooks when cloning this resource.
+ */
 class CloneComposite extends UpdateComposite implements ICloneVerbComposite
 {
     /**
@@ -23,7 +27,7 @@ class CloneComposite extends UpdateComposite implements ICloneVerbComposite
         return array_merge(
             $compositeRules,
             array_merge(parent::getRules($request, $compositeRules, ...$args), [
-                'name' => 'string|nullable|max:64|unique:domains,name',
+                {{ columns | cloneRules | raw }}
             ])
         );
     }
@@ -40,9 +44,6 @@ class CloneComposite extends UpdateComposite implements ICloneVerbComposite
      */
     public function onBeforeClone(Request $request, Model $source, Collection $targets, ...$args): void
     {
-        foreach ($targets as $target) {
-            $target->name = Str::random(8).'.'.$request->get('name', $source->name);
-        }
     }
 
     /**

@@ -1,14 +1,18 @@
 <?php
 
-namespace Roghumi\Press\Crud\Resources\Domain;
+namespace Roghumi\Press\Crud\Resources\Group;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Http\Request;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Str;
-use Roghumi\Press\Crud\Facades\DomainService;
+use Illuminate\Validation\Rule;
 use Roghumi\Press\Crud\Services\CrudService\Verbs\Clone\ICloneVerbComposite;
 
+/**
+ * Group clone composite class.
+ * Define rules, sanitizations and before, after update hooks when cloning this resource.
+ */
 class CloneComposite extends UpdateComposite implements ICloneVerbComposite
 {
     /**
@@ -23,17 +27,17 @@ class CloneComposite extends UpdateComposite implements ICloneVerbComposite
         return array_merge(
             $compositeRules,
             array_merge(parent::getRules($request, $compositeRules, ...$args), [
-                'names' => 'string|nullable|max:64|unique:domains,name',
+                'name' => ['string', 'required', Rule::unique('groups', 'name')],
+'options' => 'numeric|nullable|min:0'
             ])
         );
     }
 
     /**
-     * Before cloning domains, prefix cloned domains with a
-     *  random generated string.
+     * Before clone hook
      *
      * @param  Request  $request incoming request.
-     * @param  Model  $source source model that is used for duplicating.
+     * @param  Model  $source source model that is used for cloning.
      * @param  Collection  $targets Array of target objects created and ready to be stored in database.
      * @param  mixed  ...$args incoming route args.
      *
@@ -41,16 +45,13 @@ class CloneComposite extends UpdateComposite implements ICloneVerbComposite
      */
     public function onBeforeClone(Request $request, Model $source, Collection $targets, ...$args): void
     {
-        foreach ($targets as $target) {
-            $target->name = Str::random(8).'.'.$request->get('name', $source->name);
-        }
     }
 
     /**
-     * After cloning, position clones on same parent as source domain.
+     * After clone hook.
      *
      * @param  Request  $request incoming request.
-     * @param  Model  $source source model that is used for duplicating.
+     * @param  Model  $source source model that is used for cloning.
      * @param  Collection  $targets Array of target objects created and stored in database.
      * @param  mixed  ...$args incoming route args.
      *
@@ -58,9 +59,5 @@ class CloneComposite extends UpdateComposite implements ICloneVerbComposite
      */
     public function onAfterClone(Request $request, Model $source, Collection $targets, ...$args): void
     {
-        $sourceParentId = DomainService::getFirstParentId($source->id);
-        if (! is_null($sourceParentId)) {
-            DomainService::addAllDomainAsChild($sourceParentId, $targets->pluck('id')->toArray());
-        }
     }
 }

@@ -6,19 +6,26 @@ use Closure;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Support\Facades\Validator;
 
-/**
- * Filter a resource based on a columns value.
- * You can pass an operator to filter for values with
- * equal, less, greater value.
- */
-class WhereColumnEquals implements IQueryFilter
+class WhereColumnContains implements IQueryFilter
 {
+    public const Operator2Value = [
+        'contains' => function ($value) {
+            return '%'.$value.'%';
+        },
+        'startsWith' => function ($value) {
+            return $value.'%';
+        },
+        'endsWith' => function ($value) {
+            return '%'.$value;
+        },
+    ];
+    
     /**
      * Constructor
      *
      * @param  string  $name name of filter
      * @param  string  $column column name for this filter
-     * @return WhereColumnEquals
+     * @return WhereColumnIn
      */
     public function __construct(
         public string $name,
@@ -31,11 +38,11 @@ class WhereColumnEquals implements IQueryFilter
      *
      * @param  string  $name name of filter
      * @param  string  $column column name for this filter
-     * @return WhereColumnEquals
+     * @return WhereColumnIn
      */
     public static function create(string $name, string $column): IQueryFilter
     {
-        return new WhereColumnEquals($name, $column);
+        return new WhereColumnContains($name, $column);
     }
 
     /**
@@ -54,15 +61,18 @@ class WhereColumnEquals implements IQueryFilter
      */
     public function createFilterFunctionForRequestParams(array $data): Closure
     {
-        $operator = $data['operator'];
-        $value = $data['value'];
+        $values = $data['values'];
+        $not = $data['not'] ?? false;
+        $operator = $data['operator'] ?? 'contains';
+        $caseSensitive = $data['caseSensitive'] ?? true;
+        // @todo: implement case sensitive
 
-        return function (Builder $query) use ($operator, $value) {
-            $query->where(
-                $this->column,
-                $operator,
-                $value
-            );
+        return function (Builder $query) use ($values, $not, $operator, $caseSensitive) {
+            if ($not) {
+                $query->whereNot($this->column, 'LIKE', self::Operator2Value[$operator]($values));
+            } else {
+                $query->where($this->column, 'LIKE', self::Operator2Value[$operator]($values));
+            }
         };
     }
 
@@ -74,10 +84,10 @@ class WhereColumnEquals implements IQueryFilter
     public function validateFilterRequestParams(array $data): array
     {
         return Validator::validate($data, [
-            'operator' => 'required|string|in:'.implode(',', [
-                '=', '>', '>=', '<=', '<', '<>', '!='
-            ]),
-            'value' => 'required',
+            'not' => 'nullable|boolean',
+            'value' => 'required|array',
+            'caseSensitive' => 'nullable|bool',
+            'operator' => 'nullable|in:startsWith,endsWith,contains',
         ]);
     }
 }

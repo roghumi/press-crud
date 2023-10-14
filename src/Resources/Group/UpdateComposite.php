@@ -1,6 +1,6 @@
 <?php
 
-namespace {{ namespace }};
+namespace Roghumi\Press\Crud\Resources\Group;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Http\Request;
@@ -9,7 +9,7 @@ use Roghumi\Press\Crud\Services\CrudService\Verbs\Update\IUpdateVerbComposite;
 use Illuminate\Validation\Rule;
 
 /**
- * {{ resource | ucFirst }} update composite class.
+ * Group update composite class.
  * Define rules, sanitizations and before, after update hooks.
  */
 class UpdateComposite implements IUpdateVerbComposite
@@ -24,7 +24,8 @@ class UpdateComposite implements IUpdateVerbComposite
     public function getRules(Request $request, $compositeRules, ...$args): array
     {
         return array_merge($compositeRules, [
-            {{ columns | updateRules | raw }}
+            'name' => ['string', 'required', Rule::unique('groups', 'name')->ignore($args[0])],
+'options' => 'numeric|nullable|min:0'
         ]);
     }
 
@@ -38,7 +39,7 @@ class UpdateComposite implements IUpdateVerbComposite
      */
     public function getSanitized(Request $request, array $compositeData, ...$args): array
     {
-        {{ columns | updateSanitizeInputs | raw }}
+        
         return $compositeData;
     }
 

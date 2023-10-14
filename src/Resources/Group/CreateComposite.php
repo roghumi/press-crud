@@ -1,6 +1,6 @@
 <?php
 
-namespace {{ namespace }};
+namespace Roghumi\Press\Crud\Resources\Group;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Http\Request;
@@ -10,13 +10,13 @@ use Roghumi\Press\Crud\Helpers\UserHelpers;
 use Illuminate\Validation\Rule;
 
 /**
- * {{ resource | ucFirst }} creation base composite class.
+ * Group creation base composite class.
  * Define rules, sanitizations and before, after create hooks.
  */
 class CreateComposite implements ICreateVerbComposite
 {
     /**
-     * Rules for {{ resource | ucFirst }} creation
+     * Rules for Group creation
      *
      * @param  Request  $request incoming request
      * @param  array  $compositeRules Rules from other registered relevant compositions.
@@ -25,7 +25,8 @@ class CreateComposite implements ICreateVerbComposite
     public function getRules(Request $request, array $compositeRules, ...$args): array
     {
         return array_merge($compositeRules, [
-            {{ columns | createRules | raw }}
+            'name' => ['string', 'required', Rule::unique('groups', 'name')],
+'options' => 'numeric|nullable|min:0'
         ]);
     }
 
@@ -39,7 +40,8 @@ class CreateComposite implements ICreateVerbComposite
     public function getSanitized(Request $request, array $data, ...$args): array
     {
         return array_merge($data, [
-            {{ columns | createSanitizeInputs | raw }}
+            'name' => $request->get('name', null),
+'options' => $request->get('options', 0)
         ]);
     }
 

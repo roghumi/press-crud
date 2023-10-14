@@ -1,0 +1,60 @@
+<?php
+
+namespace {{ namespace }};
+
+use Illuminate\Database\Eloquent\Model;
+use Roghumi\Press\Crud\Services\CrudService\ICrudResource;
+use Roghumi\Press\Crud\Services\CrudService\ICrudResourceProvider;
+{{ verbsUsedClasses(verbs) | raw }}
+
+/**
+ * {{ resource | ucFirst }} Resource Provider
+ * Used as the default definition for the `Domain` crud resource.
+ */
+class {{ resource }}Provider implements ICrudResourceProvider
+{
+    /**
+     * get a unique name for this resource
+     */
+    public function getName(): string
+    {
+        return '{{ resource | toLower }}';
+    }
+
+    /**
+     * Fully qualified model class name for this resource
+     */
+    public function getModelClass(): string
+    {
+        return {{ resource | ucFirst }}::class;
+    }
+
+    /**
+     * Retrieve object by its ID
+     *
+     * @param  int|string  $id
+     */
+    public function getObjectById($id): ?ICrudResource
+    {
+        return {{ resource | ucFirst }}::withTrashed()->find($id);
+    }
+
+    /**
+     * Generate a new resource based on the data that can be stored
+     */
+    public function generateModelFromData(array $data): ?Model
+    {
+        return new {{ resource | ucFirst }}($data);
+    }
+
+    /**
+     * Get a map of available verbs (ICrudVerb interface unique names)
+     *  to list of that verb compositions for this resource
+     */
+    public function getAvailableVerbAndCompositions(): array
+    {
+        return [
+            {{ verbs | providerVerbs | raw }}
+        ];
+    }
+}

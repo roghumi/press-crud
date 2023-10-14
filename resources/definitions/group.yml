@@ -1,29 +1,75 @@
 #
 # LaraPress resource definition.
-#
+# ####################################################
+# ####################### Resource definition guide ##
+# ####################################################
+# doc: document description for this resource.
+# resource: class name of resource.
+# provider: class name of resource provider.
+# namespace: namespace for all generated classes.
+# timestamp: bool or list of timestamp columns.
+# softDeletes: bool or name of soft delete column.
+# output: folder path for generated files.
+# factory: bool or factory object.
+  # factory object:
+    # namespace: namespace of generated factory class.
+    # output: path of generated factory class file.
+# ignoreFiles: list of files to skip when generating.
+# verbs: list of verb object.
+  # verb object:
+    # verb: class name of desired verb.
+    # comp: bool or list of extra composite class names.
+# columns: array of column object.
+  # column object:
+    # name: column in database table.
+    # doc: column document description.
+    # type: column type in database table.
+    # sort: is column sortable.
+    # input: input object or false or one of 'auth_id'.
+    # filters: list of filters for column, see Services/Generator/Constants and FiltersDictionary.
+    # rules: string of rules or list of rule object.
+    #   [rule key name]: one of 'unique'.
+    #   update: exclude-args-n (n is args number in route that will be excluded in update unique rule).
+    #   clone: update rule name with clone rule name in clone composite.
+    # default: default value for column when sanitizing inputs.
+    # nullable: is column nullable and can column be updated to null.
+# relations: array of relation object.
+  # relation object:
+    # name: relation name.
+    # doc: relation document description.
+    # type: relation type used to determine relation class,
+    #         see Services/Generator/Constants and RelationsDictionary.
+    # props: a list of props to be passed to the relation class.
+    # provider: fqn of provider class or one of 'user.provider'.
+    # class: fqn of model class or class base name of a resource in crud resources
+    #         or one of 'user.class'.
+
 resource: Group
 provider: GroupProvider
 namespace: Roghumi\Press\Crud\Resources\Group
 timestamps: true
 softDeletes: true
-hasFactory: true
+output: src/Resources/Group
+factory:
+  namespace: Roghumi\Press\Crud\Database\Factories
+  output: database/factories
+
 ignoreFiles:
+  - migrations
   - resource
 
 verbs:
-  - verb: Create
-    comp: CreateComposition
-  - verb: Update
-    comp: UpdateComposition
-  - verb: Query
-    comp: QueryComposition
-  - verb: Export
-    comp: ExportComposition
-  - verb: Clone
-    comp: CloneComposition
-  - verb: Export
-  - verb: Delete
-  - verb: Restore
+  - verb: create
+    comp: CreateComposite
+  - verb: update
+    comp: UpdateComposite
+  - verb: query
+    comp: QueryComposite
+  - verb: clone
+    comp: CloneComposite
+  - verb: export
+  - verb: delete
+  - verb: restore
 
 columns:
   - name: id
@@ -36,11 +82,16 @@ columns:
   - name: name
     type: string
     sort: true
+    faker:
+      function: name
     rules:
       - string
       - required
-      - unique: groups,name
-        update: exclude
+      - unique:
+          table: groups
+          column: name
+        update: exclude-args-0
+        clone: names.*
     filters:
       - equals
       - contains
@@ -48,12 +99,15 @@ columns:
     type: string
     sort: true
     input: auth_id
+    faker: 1
     filters:
       - equals
       - between
   - name: options
     type: numeric
+    default: 0
     sort: true
+    faker: 0
     rules: numeric|nullable|min:0
     filters:
       - equals
@@ -61,5 +115,7 @@ columns:
 relations:
   - name: author
     type: BelongsTo
+    props:
+      - author_id
     provider: user.provider
     class: user.class

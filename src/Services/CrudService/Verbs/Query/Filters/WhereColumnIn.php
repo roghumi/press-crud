@@ -50,12 +50,14 @@ class WhereColumnIn implements IQueryFilter
     public function createFilterFunctionForRequestParams(array $data): Closure
     {
         $values = $data['values'];
+        $not = $data['not'] ?? false;
 
-        return function (Builder $query) use ($values) {
-            $query->whereIn(
-                $this->column,
-                $values
-            );
+        return function (Builder $query) use ($values, $not) {
+            if ($not) {
+                $query->whereNotIn($this->column, $values);
+            } else {
+                $query->whereIn($this->column, $values);
+            }
         };
     }
 
@@ -68,6 +70,7 @@ class WhereColumnIn implements IQueryFilter
     public function validateFilterRequestParams(array $data): array
     {
         return Validator::validate($data, [
+            'not' => 'nullable|boolean',
             'values' => 'required|array',
         ]);
     }

@@ -3,7 +3,7 @@
 namespace Roghumi\Press\Crud\Providers;
 
 use Illuminate\Support\ServiceProvider;
-use Roghumi\Press\Crud\Commands\MakeComposite;
+use Roghumi\Press\Crud\Services\Generator\MakeComposite;
 use Roghumi\Press\Crud\Helpers\MigrationPublishTrait;
 use Roghumi\Press\Crud\Services\AccessService\AccessService;
 use Roghumi\Press\Crud\Services\AccessService\IAccessService;
