@@ -61,12 +61,12 @@ class GroupProvider implements ICrudResourceProvider
     {
         return [
             Create::class => [CreateComposite::class],
-Update::class => [UpdateComposite::class],
-Query::class => [QueryComposite::class],
-CloneVerb::class => [CloneComposite::class],
-Export::class => [],
-Delete::class => [],
-Restore::class => []
+            Update::class => [UpdateComposite::class],
+            Query::class => [QueryComposite::class],
+            CloneVerb::class => [CloneComposite::class],
+            Export::class => [],
+            Delete::class => [],
+            Restore::class => []
         ];
     }
 }

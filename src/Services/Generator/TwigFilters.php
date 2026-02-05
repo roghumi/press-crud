@@ -132,7 +132,7 @@ class TwigFilters
         $lines = [];
 
         foreach ($relations as $relation) {
-            $types = Constants::RelationsDictionary[$relation['type']] ?? null;
+            $types = Constants::DIC_RELATIONS[$relation['type']] ?? null;
             $name = $relation['name'];
             $type = class_basename($types[0] ?? null);
             $queryRelationType = class_basename($types[1] ?? null);
@@ -157,7 +157,7 @@ class TwigFilters
         foreach ($columns as $column) {
             $filters = $column['filters'] ?? [];
             foreach ($filters as $filter) {
-                $type = class_basename(Constants::FiltersDictionary[$filter]);
+                $type = class_basename(Constants::DIC_FILTERS[$filter]);
                 $name = $column['name'] . '.' . $filter;
                 $colName = $column['name'];
                 $lines[] = "$type::create('$name', '$colName')";
@@ -210,7 +210,7 @@ class TwigFilters
     }
     public static function relationClass(string $basename): string
     {
-        return Constants::RelationClassDictionary[$basename] ?? self::ucFirst($basename);
+        return Constants::DIC_CLASS[$basename] ?? self::ucFirst($basename);
     }
     public static function fakerEval($faker)
     {

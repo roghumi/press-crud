@@ -75,7 +75,7 @@ class WhereColumnEquals implements IQueryFilter
     {
         return Validator::validate($data, [
             'operator' => 'required|string|in:'.implode(',', [
-                '=', '>', '>=', '<=', '<', '<>', '!='
+                '=', '>', '>=', '<=', '<', '<>',
             ]),
             'value' => 'required',
         ]);

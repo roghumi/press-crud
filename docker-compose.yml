@@ -1,5 +1,3 @@
-version: '3.5'
-
 services:
   ## PHP Cli Dev mode with xDebug, phpunit, phpcs
   ### LaraPress dev environement
@@ -11,4 +9,18 @@ services:
     volumes:
       - ./:/var/www
     extra_hosts:
-      - "host.docker.internal:host-gateway" # xDebug uses this to connect to VSCode
+      - host.docker.internal:host-gateway # xDebug uses this to connect to VSCode
+
+  opencode:
+    image: ghcr.io/anomalyco/opencode:1.1.48
+    environment:
+      - OPENCODE_CONFIG=/app/dev/opencode.json
+      - HTTPS_PROXY=http://host.docker.internal:8080
+      - no_proxy=host.docker.internal
+    volumes:
+      - ./:/app
+    ports:
+      - 2004:4096
+    extra_hosts:
+      - host.docker.internal:host-gateway
+

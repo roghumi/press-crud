@@ -9,7 +9,7 @@ class TwigFunctions
         $lines = [];
 
         foreach ($relations as $relation) {
-            $types = Constants::RelationsDictionary[$relation['type']] ?? null;
+            $types = Constants::DIC_RELATIONS[$relation['type']] ?? null;
             $relationType = $types[0] ?? null;
 
             if ($relationType) {
@@ -25,7 +25,7 @@ class TwigFunctions
         $lines = [];
 
         foreach ($relations as $relation) {
-            $types = Constants::RelationsDictionary[$relation['type']] ?? null;
+            $types = Constants::DIC_RELATIONS[$relation['type']] ?? null;
             $queryRelationType = $types[1] ?? null;
 
             if ($queryRelationType) {
@@ -36,7 +36,7 @@ class TwigFunctions
         foreach ($columns as $column) {
             $filters = $column['filters'] ?? [];
             foreach ($filters as $filter) {
-                $type = Constants::FiltersDictionary[$filter] ?? null;
+                $type = Constants::DIC_FILTERS[$filter] ?? null;
                 if ($type) {
                     $lines[] = "use $type;";
                 }

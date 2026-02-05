@@ -1,20 +1,27 @@
-# User guid
-## Table of contents
-* [Introduction, What is Crud?](#introduction)
-* [Crud for Laravel](#crud-for-laravel)
-* [LaraPress Crud Verbs](#larapress-crud-verbs)
-* [Defining a new resource](#defining-new-resource)
-* [Verb compositions](#verb-compositions)
-* [Domain and Group based access control](#domain-and-group-based-access-control)
+# How to use
 
-### Introduction, What is Crud?
+## Setup
+1. Install the package via composer:
+```
+composer require roghumi/larapress-crud
+```
 
-### Crud for Laravel
+1. Publish the configuration file:
+```
+php artisan vendor:publish --provider="Roghumi\Press\Crud\CrudServiceProvider"
+```
 
-### LaraPress Crud Verbs
+1. Run the migrations:
+```
+php artisan migrate
+```
 
-### Defining a new resource
+## Available Services:
+This package contains a number of base services to handle `RB Access Control` of defined `Resources` for a `CRUD` API.
 
-### Verb compositions
-
-### Domain and Group based access control
+These services include:
+1. AccessService: Manage role based access on `Resources`. Works as a separate pipeline of Laravel's `Permissions` and `Gates`.
+1. CrudService: Resource API endpoints and verb execution pipeline.
+1. DomainService: Hierarchy based access control over `Resources`
+1. RoleService: Manages user roles.
+1. Generator: Define `Resources` with yaml syntax and generate appropriate `CrudServices` for them.

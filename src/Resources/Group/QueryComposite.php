@@ -5,21 +5,16 @@ namespace Roghumi\Press\Crud\Resources\Group;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Http\Request;
 use Illuminate\Pagination\LengthAwarePaginator;
-use Illuminate\Support\Facades\Auth;
-use Roghumi\Press\Crud\Services\AccessService\IUser;
 use Roghumi\Press\Crud\Services\CrudService\Verbs\Query\IQueryVerbComposite;
 use Roghumi\Press\Crud\Services\CrudService\Verbs\Query\Traits\QueryCompositeTrait;
 use Roghumi\Press\Crud\Services\CrudService\Verbs\Query\Columns\IQueryColumn;
+use Roghumi\Press\Crud\Services\CrudService\Verbs\Query\Columns\QueryColumn;
 use Roghumi\Press\Crud\Services\CrudService\Verbs\Query\Filters\IQueryFilter;
 use Roghumi\Press\Crud\Services\CrudService\Verbs\Query\Relations\IQueryRelation;
 use Roghumi\Press\Crud\Services\CrudService\Verbs\Query\Relations\QueryBelongsToRelation;
 use Roghumi\Press\Crud\Services\CrudService\Verbs\Query\Filters\WhereColumnEquals;
 use Roghumi\Press\Crud\Services\CrudService\Verbs\Query\Filters\WhereColumnBetween;
-use Roghumi\Press\Crud\Services\CrudService\Verbs\Query\Filters\WhereColumnEquals;
 use Roghumi\Press\Crud\Services\CrudService\Verbs\Query\Filters\WhereColumnContains;
-use Roghumi\Press\Crud\Services\CrudService\Verbs\Query\Filters\WhereColumnEquals;
-use Roghumi\Press\Crud\Services\CrudService\Verbs\Query\Filters\WhereColumnBetween;
-use Roghumi\Press\Crud\Services\CrudService\Verbs\Query\Filters\WhereColumnEquals;
 
 /**
  * Group query composite.
@@ -43,12 +38,12 @@ class QueryComposite implements IQueryVerbComposite
     {
         return array_merge($compositeColumns, [
             QueryColumn::create('id', true),
-QueryColumn::create('name', true),
-QueryColumn::create('author_id', true),
-QueryColumn::create('options', true),
-QueryColumn::create('created_at', true),
-QueryColumn::create('updated_at', true),
-QueryColumn::create('deleted_at', true)
+            QueryColumn::create('name', true),
+            QueryColumn::create('author_id', true),
+            QueryColumn::create('options', true),
+            QueryColumn::create('created_at', true),
+            QueryColumn::create('updated_at', true),
+            QueryColumn::create('deleted_at', true)
         ]);
     }
 

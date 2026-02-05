@@ -4,7 +4,6 @@ namespace Roghumi\Press\Crud\Resources\Group;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Http\Request;
-use Illuminate\Validation\Rule;
 use Roghumi\Press\Crud\Services\CrudService\Verbs\Update\IUpdateVerbComposite;
 use Illuminate\Validation\Rule;
 
@@ -25,7 +24,7 @@ class UpdateComposite implements IUpdateVerbComposite
     {
         return array_merge($compositeRules, [
             'name' => ['string', 'required', Rule::unique('groups', 'name')->ignore($args[0])],
-'options' => 'numeric|nullable|min:0'
+            'options' => 'numeric|nullable|min:0'
         ]);
     }
 

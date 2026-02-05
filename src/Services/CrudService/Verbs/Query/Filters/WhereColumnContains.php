@@ -8,7 +8,7 @@ use Illuminate\Support\Facades\Validator;
 
 class WhereColumnContains implements IQueryFilter
 {
-    public const Operator2Value = [
+    public const OPERATOR2VALUE = [
         'contains' => function ($value) {
             return '%'.$value.'%';
         },
@@ -69,9 +69,9 @@ class WhereColumnContains implements IQueryFilter
 
         return function (Builder $query) use ($values, $not, $operator, $caseSensitive) {
             if ($not) {
-                $query->whereNot($this->column, 'LIKE', self::Operator2Value[$operator]($values));
+                $query->whereNot($this->column, 'LIKE', self::OPERATOR2VALUE[$operator]($values));
             } else {
-                $query->where($this->column, 'LIKE', self::Operator2Value[$operator]($values));
+                $query->where($this->column, 'LIKE', self::OPERATOR2VALUE[$operator]($values));
             }
         };
     }
@@ -84,9 +84,9 @@ class WhereColumnContains implements IQueryFilter
     public function validateFilterRequestParams(array $data): array
     {
         return Validator::validate($data, [
-            'not' => 'nullable|boolean',
             'value' => 'required|array',
             'caseSensitive' => 'nullable|bool',
+            'not' => 'nullable|boolean',
             'operator' => 'nullable|in:startsWith,endsWith,contains',
         ]);
     }

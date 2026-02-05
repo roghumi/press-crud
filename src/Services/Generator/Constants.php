@@ -18,7 +18,7 @@ use Illuminate\Database\Eloquent\Relations\MorphTo;
 
 class Constants
 {
-    public const RelationsDictionary = [
+    public const DIC_RELATIONS = [
         'BelongsTo' => [BelongsTo::class, QueryBelongsToRelation::class],
         'BelongsToMany' => [BelongsToMany::class, QueryBelongsToRelation::class],
         'HasMany' => [HasMany::class, QueryBelongsToRelation::class],
@@ -28,13 +28,13 @@ class Constants
         'MorphOne' => [MorphOne::class, QueryBelongsToRelation::class],
         'MorphMany' => [MorphMany::class, QueryBelongsToRelation::class],
     ];
-    public const FiltersDictionary = [
+    public const DIC_FILTERS = [
         'in' => WhereColumnIn::class,
         'equals' => WhereColumnEquals::class,
         'between' => WhereColumnBetween::class,
         'contains' => WhereColumnContains::class,
     ];
-    public const RelationClassDictionary = [
-        'user.class' => "config('press.crud.user.class')",
+    public const DIC_CLASS = [
+        'user.class' => config('press.crud.user.class'),
     ];
 }

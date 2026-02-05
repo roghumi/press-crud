@@ -1,29 +1,30 @@
-# LaraPress Crud
-## Easy REST Api and access control for eloquent models.
+# LaraPress CRUD
 
-### Features:
-* Collection of common Api verbs such as Create, Update, Delete, Restore, Duplicate, Query and Export.
-* Advance json querying endpoints, with filtering, relation loading and sorting all with RBAC.
-* Highly modular and controllable resource definition.
-* Interfaces to implement new custom verbs.
-* Compositions are a set of interfaces for customizing verb actions (rules,outputs,logics).
-* Role based Access control (RBAC) for controller authorization.
-* Extending and limiting RBAC with domains and groups.
-* Api for role,domain and group management. 
+A Laravel package for creating RESTful CRUD APIs with minimal configuration.
 
-### Requirements
-* PHP >= 8
-* Laravel >= 8
+## Features
 
-### Installation
-* ``composer install roghumi/larapress-crud``
+- Automatic API endpoint generation
+- Built-in RBAC integration
+- Flexible verb compositions
+- Query filtering and sorting
+- Export functionality
+- Custom verb support
 
-### [How to use](./HOWTO.md)
+## Installation
 
-### [Contribution Guid](./CONTRIB.md)
+```bash
+composer require roghumi/larapress-crud
+```
 
-### License: [MIT](./LICENSE)
+## Documentation
 
-### Author
-* Roghumi
-    * Email: larapress@roghumi.com
+Please see the [HOWTO.md](HOWTO.md) file for detailed usage instructions.
+
+## Contributing
+
+Please see [CONTRIB.md](CONTRIB.md) for details on contributing to this project.
+
+## License
+
+This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md) file for details.

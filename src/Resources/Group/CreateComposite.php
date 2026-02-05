@@ -11,7 +11,7 @@ use Illuminate\Validation\Rule;
 
 /**
  * Group creation base composite class.
- * Define rules, sanitizations and before, after create hooks.
+ * Define rules, sanitization and before, after create hooks.
  */
 class CreateComposite implements ICreateVerbComposite
 {
@@ -26,7 +26,7 @@ class CreateComposite implements ICreateVerbComposite
     {
         return array_merge($compositeRules, [
             'name' => ['string', 'required', Rule::unique('groups', 'name')],
-'options' => 'numeric|nullable|min:0'
+            'options' => 'numeric|nullable|min:0'
         ]);
     }
 
@@ -41,7 +41,7 @@ class CreateComposite implements ICreateVerbComposite
     {
         return array_merge($data, [
             'name' => $request->get('name', null),
-'options' => $request->get('options', 0)
+            'options' => $request->get('options', 0)
         ]);
     }
 

@@ -28,7 +28,7 @@ class CloneComposite extends UpdateComposite implements ICloneVerbComposite
             $compositeRules,
             array_merge(parent::getRules($request, $compositeRules, ...$args), [
                 'name' => ['string', 'required', Rule::unique('groups', 'name')],
-'options' => 'numeric|nullable|min:0'
+                'options' => 'numeric|nullable|min:0'
             ])
         );
     }
