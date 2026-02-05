@@ -1,26 +1,44 @@
 # LaraPress Crud
-## Easy REST Api and access control for eloquent models.
+## Easy REST API and access control for eloquent models.
 
 ### Features:
-* Collection of common Api verbs such as Create, Update, Delete, Restore, Duplicate, Query and Export.
-* Advance json querying endpoints, with filtering, relation loading and sorting all with RBAC.
+* Collection of common API verbs such as Create, Update, Delete, Restore, Duplicate, Query and Export.
+* Advanced JSON querying endpoints, with filtering, relation loading and sorting all with RBAC.
 * Highly modular and controllable resource definition.
 * Interfaces to implement new custom verbs.
-* Compositions are a set of interfaces for customizing verb actions (rules,outputs,logics).
+* Compositions are a set of interfaces for customizing verb actions (rules, outputs, logics).
 * Role based Access control (RBAC) for controller authorization.
 * Extending and limiting RBAC with domains and groups.
-* Api for role,domain and group management. 
+* API for role, domain and group management. 
+
+### Package Services
+This package consists of several core services that work together to provide a comprehensive CRUD solution:
+
+**1. CrudService** 
+The main service that orchestrates CRUD operations across resources. It registers routes for CRUD verbs and executes verbs for specific resources. It's the primary entry point for interacting with the package's functionality.
+
+**2. AccessService**
+Manages access control for CRUD operations, implementing role-based and domain-based access control. It checks user permissions and enforces authorization rules for each verb and resource.
+
+**3. RoleService** 
+Handles role management functionality including creating, assigning, and managing roles for users within the system. Provides the foundation for RBAC implementation.
+
+**4. DomainService**
+Manages domain-based access control structures including domains, groups, and hierarchies. Used to extend RBAC with more complex access control requirements.
+
+**5. Command Service**
+Includes console commands for generating resource providers and composites, making it easier to implement new CRUD resources in your application.
 
 ### Requirements
 * PHP >= 8
 * Laravel >= 8
 
 ### Installation
-* ``composer install roghumi/larapress-crud``
+* `composer require roghumi/larapress-crud`
 
 ### [How to use](./HOWTO.md)
 
-### [Contribution Guid](./CONTRIB.md)
+### [Contribution Guide](./CONTRIB.md)
 
 ### License: [MIT](./LICENSE)
 
