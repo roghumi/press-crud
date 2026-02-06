@@ -10,9 +10,6 @@
         }
       },
       "models": {
-        "qwen3-coder:30b-16k": {
-          "tools": true
-        },
         "qwen3-coder:30b": {
           "tools": true
         },
@@ -22,6 +19,7 @@
       }
     }
   },
+  "model": "ollama/qwen3-coder:30b",
   "plugin": [
   ],
   "mcp": {

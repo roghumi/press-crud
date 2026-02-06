@@ -16,7 +16,6 @@ services:
     environment:
       - HTTPS_PROXY=http://host.docker.internal:8080
       - no_proxy=host.docker.internal
-      - OPENCODE_CONFIG=/app/dev/opencode.json
     ports:
       - 4096:4096
     volumes:

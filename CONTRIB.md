@@ -17,6 +17,10 @@
     * Fix with pint on dirty (uncommitted) files: ``docker compose run -it phpcli pint --dirty``
 * Create a pull request
 
+### Run AI Assist:
+1. Install Docker & Docker Compose
+1. run `docker compose run --rm -it opencode /app`
+
 ## Development environment for VSCode setup guid
 * ``mkdir .vscode``
 * put this as settings.json
