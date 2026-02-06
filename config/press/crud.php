@@ -51,4 +51,9 @@ return [
             'csv' => \Roghumi\Press\Crud\Services\CrudService\Verbs\Export\Formatters\CSVExportFormatter::class,
         ],
     ],
+
+    // allow cross origin access to domains // comment out for disabling cr origin.
+    'cross-origin-allow' => [
+        '*'
+    ]
 ];

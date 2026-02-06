@@ -1,6 +1,50 @@
 # Contribution Guide
 
-## How to contribute
+### Run AI Assist:
+1. Install Docker & Docker Compose
+1. run `docker compose run --rm -it opencode /app`
+
+## Development environment for VSCode setup guid
+* ``mkdir .vscode``
+* put this as settings.json
+```
+{
+    "LaravelExtraIntellisense.phpCommand": "docker compose exec -it phpcli php -r \"{code}\"",
+    "php.validate.executablePath": "dev/php",
+    "php.debug.ideKey": "DOCKER",
+    "php.debug.executablePath": "dev/php",
+    "phpcs.enable": true,
+    "phpcs.executablePath": "dev/phpcs",
+    "phpcs.autoConfigSearch": false,
+    "phpcs.lintOnType": false,
+    "phpcs.standard": "Larapress",
+    "phpcs.ignorePatterns": [
+        "tests/*",
+        "lang/*",
+        "database/*",
+        "routes/*",
+        "config/*",
+        "vendor/*"
+    ]
+}
+```
+* put this as launch.json
+```
+{
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "Listen for Xdebug",
+            "type": "php",
+            "request": "launch",
+            "port": 9003,
+            "pathMappings": {
+                "/var/www/": "${workspaceFolder}"
+            },
+        }
+    ]
+}
+```
 
 1. Fork the repository
 2. Create a new branch for your feature/fix

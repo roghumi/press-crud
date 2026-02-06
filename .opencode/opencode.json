@@ -1,0 +1,35 @@
+{
+  "$schema": "https://opencode.ai/config.json",
+  "provider": {
+    "ollama": {
+      "npm": "@ai-sdk/openai-compatible",
+      "options": {
+        "baseURL": "http://host.docker.internal:11434/v1",
+        "websearch_cited": {
+          "model": "ukjin/Qwen3-30B-A3B-Thinking-2507-Deepseek-v3.1-Distill:4b"
+        }
+      },
+      "models": {
+        "qwen3-coder:30b": {
+          "tools": true
+        },
+        "ukjin/Qwen3-30B-A3B-Thinking-2507-Deepseek-v3.1-Distill:4b": {
+          "tools": true
+        }
+      }
+    }
+  },
+  "model": "ollama/qwen3-coder:30b",
+  "plugin": [
+  ],
+  "mcp": {
+    "searxng": {
+      "type": "local",
+      "command": ["npx", "-y", "mcp-searxng"],
+      "enabled": true,
+      "environment": {
+        "SEARXNG_URL": "http://host.docker.internal:2002"
+      }
+    }
+  }
+}
