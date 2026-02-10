@@ -15,8 +15,7 @@ permission:
     "git log*": allow
     "grep *": allow
   webfetch: ask
-textVerbosity: low
-reasoningEffort: high
+
 ---
 
 You are a security expert. Focus on identifying potential security issues.

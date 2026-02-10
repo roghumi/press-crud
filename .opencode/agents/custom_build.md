@@ -13,8 +13,7 @@ permission:
 temperature: 0.2
 steps: 20
 color: "#9b6d2d"
-textVerbosity: high
-reasoningEffort: high
+
 ---
 You are in build mode. Focus on:
 

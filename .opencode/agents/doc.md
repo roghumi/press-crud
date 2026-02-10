@@ -15,8 +15,7 @@ permission:
     "git log*": allow
     "grep *": allow
   webfetch: allow
-textVerbosity: low
-reasoningEffort: high
+
 ---
 
 You are a technical writer. Create clear, comprehensive documentation.
