@@ -44,6 +44,12 @@ class PressCrudServiceProvider extends ServiceProvider
 
             $this->commands([
                 MakeComposite::class,
+                \Roghumi\Press\Crud\Services\RoleService\Commands\RoleCreateCommand::class,
+                \Roghumi\Press\Crud\Services\RoleService\Commands\RoleAssignCommand::class,
+                \Roghumi\Press\Crud\Services\RoleService\Commands\RoleRevokeCommand::class,
+                \Roghumi\Press\Crud\Services\RoleService\Commands\PermissionAssignCommand::class,
+                \Roghumi\Press\Crud\Services\RoleService\Commands\PermissionRevokeCommand::class,
+                \Roghumi\Press\Crud\Services\RoleService\Commands\UserRolesCommand::class,
             ]);
         }
     }
