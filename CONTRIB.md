@@ -1,6 +1,22 @@
-# Contribution Guide
+## Contribution Guid
+* Clone this repository
+* Create development image: ``docker compose build phpcli --build-arg UID=$(id -u) --build-arg GID=$(id -g)``
+* Install composer packages: ``docker compose run -it phpcli composer install``
+* Checkout to a new branch: 
+    * dev-{some name} for new features
+    * fix-{some name} for bug fixes, translations, linting and version updates
+    * next-{some name} for breaking changes
+* Do your thing
+* Run tests
+    * ``docker compose run -it phpcli phpunit``
+* Lint code
+    * ``docker compose run -it phpcli pint``
+    * ``docker compose run -it phpcli phpcs``
+    * ``docker compose run -it phpcli phpcs --report=diff``
+    * ``docker compose run -it phpcli phpcbf``
+* Create a pull request
 
-### Run AI Assist:
+## Run AI Assist:
 1. Install Docker & Docker Compose
 1. run `docker compose run --rm -it opencode /app`
 
@@ -46,22 +62,13 @@
 }
 ```
 
-1. Fork the repository
-2. Create a new branch for your feature/fix
-3. Make your changes
-4. Write tests if applicable
-5. Submit a pull request
-
 ## Code style
-
 This project follows PSR-12 coding standards. Please ensure your code adheres to these standards.
 
 ## Testing
-
 All contributions must include appropriate tests. The project uses PHPUnit for testing.
 
 ## Reporting issues
-
 Please report any bugs or feature requests in the issue tracker. When reporting bugs, please include:
 
 - A clear description of the problem
@@ -70,7 +77,6 @@ Please report any bugs or feature requests in the issue tracker. When reporting 
 - Any relevant logs or error messages
 
 ## Pull Request Guidelines
-
 1. Keep changes focused and small
 2. Include comprehensive tests
 3. Update documentation as needed
@@ -78,5 +84,4 @@ Please report any bugs or feature requests in the issue tracker. When reporting 
 5. Write clear commit messages
 
 ## License
-
 By contributing to this project, you agree that your contributions will be licensed under the MIT license.

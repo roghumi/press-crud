@@ -52,6 +52,54 @@ return [
         ],
     ],
 
+    // list of available relation ships when using generator service
+    'relations' => [
+        'BelongsTo' => [
+            \Illuminate\Database\Eloquent\Relations\BelongsTo::class,
+            \Roghumi\Press\Crud\Services\CrudService\Verbs\Query\Relations\QueryBelongsToRelation::class
+        ],
+        'BelongsToMany' => [
+            \Illuminate\Database\Eloquent\Relations\BelongsToMany::class,
+            \Roghumi\Press\Crud\Services\CrudService\Verbs\Query\Relations\QueryBelongsToManyRelation::class
+        ],
+        'HasMany' => [
+            \Illuminate\Database\Eloquent\Relations\HasMany::class,
+            \Roghumi\Press\Crud\Services\CrudService\Verbs\Query\Relations\QueryHasManyRelation::class
+        ],
+        'HasOne' => [
+            \Illuminate\Database\Eloquent\Relations\HasOne::class,
+            \Roghumi\Press\Crud\Services\CrudService\Verbs\Query\Relations\QueryHasOneRelation::class
+        ],
+        'HasManyThrough' => [
+            \Illuminate\Database\Eloquent\Relations\HasManyThrough::class,
+            \Roghumi\Press\Crud\Services\CrudService\Verbs\Query\Relations\QueryHasManyThroughRelation::class
+        ],
+        'MorphTo' => [
+            \Illuminate\Database\Eloquent\Relations\MorphTo::class,
+            \Roghumi\Press\Crud\Services\CrudService\Verbs\Query\Relations\QueryMorphToRelation::class
+        ],
+        'MorphOne' => [
+            \Illuminate\Database\Eloquent\Relations\MorphOne::class,
+            \Roghumi\Press\Crud\Services\CrudService\Verbs\Query\Relations\QueryMorphOneRelation::class
+        ],
+        'MorphMany' => [
+            \Illuminate\Database\Eloquent\Relations\MorphMany::class,
+            \Roghumi\Press\Crud\Services\CrudService\Verbs\Query\Relations\QueryMorphManyRelation::class
+        ],
+        'MorphToMany' => [
+            \Illuminate\Database\Eloquent\Relations\MorphToMany::class,
+            \Roghumi\Press\Crud\Services\CrudService\Verbs\Query\Relations\QueryMorphToManyRelation::class
+        ],
+    ],
+
+    // available resource query filters.
+    'filters' => [
+        'in' => \Roghumi\Press\Crud\Services\CrudService\Verbs\Query\Filters\WhereColumnIn::class,
+        'equals' => \Roghumi\Press\Crud\Services\CrudService\Verbs\Query\Filters\WhereColumnEquals::class,
+        'between' => \Roghumi\Press\Crud\Services\CrudService\Verbs\Query\Filters\WhereColumnBetween::class,
+        'contains' => \Roghumi\Press\Crud\Services\CrudService\Verbs\Query\Filters\WhereColumnContains::class,
+    ],
+
     // allow cross origin access to domains // comment out for disabling cr origin.
     'cross-origin-allow' => [
         '*'
