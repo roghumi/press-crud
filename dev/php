@@ -1,2 +1,2 @@
-command="docker compose run phpcli php "$@""
+command="docker compose run --rm -it phpcli php "$@""
 $command
