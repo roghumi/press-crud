@@ -34,10 +34,10 @@ LaraPress supports the following built-in verbs:
 - **Restore** - Handles soft-deleted resource restoration (for models with soft deletes)
 - **Clone** - Handles resource duplication operations
 - **Export** - Handles resource data export operations
-Custom new verbs can be added to the pipeline.
-// @todo: show how to add a new verb
 
-#### Verb Compositions
+#### Please see [HOWTO_CustomVerb.md](HOWTO_CustomVerb.md) for details on how to implement a custom verb.
+
+### Verb Compositions
 Verb compositions are interfaces that define how verbs interact with specific resources. They allow for customization without reimplementing entire verbs:
 - **ICreateVerbComposite** - Customizing create verb behavior
 - **IUpdateVerbComposite** - Customizing update verb behavior
@@ -60,6 +60,8 @@ Resource providers are classes that define how specific Eloquent models are expo
 - Defines access control rules for each verb
 - Configures verb compositions to customize behavior
 
+#### Please see [HOWTO_UserResourceExample.md](HOWTO_UserResourceExample.md) for details on how to implement a sample resource provider.
+
 #### Access Control
 The package provides comprehensive access control through:
 - **Role-Based Access Control (RBAC)**: Verb-specific authorization for each role
@@ -67,54 +69,10 @@ The package provides comprehensive access control through:
 - **Permission Management**: Automatic permission generation and validation
 - **Middleware Integration**: RoleBasedAccessControl middleware for route protection
 
-### How the Pipeline Works
-
-1. **Initialization**: The CrudService registers routes for each enabled verb and resource provider
+### How the Pipeline Works Internally
+1. **Initialization**: The CrudService registers routes for each enabled verb and resource provider from `press.crud` config file
 2. **Request Routing**: HTTP requests are directed to appropriate verb handlers via registered routes
-3. **Authorization**: The RoleBasedAccessControl middleware validates user permissions
+3. **Authorization**: The RoleBasedAccessControl middleware validates user permissions for that verb on that resource type or id
 4. **Request Processing**: Verbs process requests with composition-based customizations
 5. **Data Handling**: Queries are built with filtering, sorting, and relation loading
 6. **Response Generation**: Results are returned through standardized output format
-
-### Configuration Example
-```php
-// Define a resource provider
-class UserProvider implements ICrudResourceProvider
-{
-    public function getName(): string
-    {
-        return 'user';
-    }
-    
-    public function getModelClass(): string
-    {
-        return User::class;
-    }
-    
-    public function getAvailableVerbAndCompositions(): array
-    {
-        return [
-            'query' => [new UserQueryComposite()],
-            'create' => [new UserCreateComposite()],
-            'update' => [new UserUpdateComposite()],
-            'delete' => [new UserDeleteComposite()],
-        ];
-    }
-}
-```
-
-// @todo: show UserQueryComposite implementation example
-
-
-### Usage with Middleware
-All CRUD routes are automatically protected with RBAC middleware while registered with `crud.php` config file.
-
-## Advanced Features
-- JSON querying endpoints with advanced filtering, relation loading and sorting with RBAC
-- Modular architecture with interfaces to implement new custom verbs
-- Compositions set of interfaces for customizing verb actions (rules, outputs, logics)
-- Extending and limiting RBAC with domains and groups
-- API for role, domain and group management
-- Soft delete support with restore verb for recovering soft-deleted resources
-- Export functionality for data export in various formats (CSV, etc.)
-- Highly configurable through compositions and providers
