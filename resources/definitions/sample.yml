@@ -14,7 +14,6 @@
   # factory object:
     # namespace: namespace of generated factory class.
     # output: path of generated factory class file.
-# ignoreFiles: list of files to skip when generating.
 # verbs: list of verb object.
   # verb object:
     # verb: class name of desired verb.

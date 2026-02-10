@@ -9,7 +9,8 @@ class TwigFunctions
         $lines = [];
 
         foreach ($relations as $relation) {
-            $types = Constants::DIC_RELATIONS[$relation['type']] ?? null;
+            $rt = $relation['type'];
+            $types = config(`press.crud.relations.$rt`) ?? null;
             $relationType = $types[0] ?? null;
 
             if ($relationType) {
@@ -25,7 +26,8 @@ class TwigFunctions
         $lines = [];
 
         foreach ($relations as $relation) {
-            $types = Constants::DIC_RELATIONS[$relation['type']] ?? null;
+            $rt = $relation['type'];
+            $types = config(`press.crud.relations.$rt`) ?? null;
             $queryRelationType = $types[1] ?? null;
 
             if ($queryRelationType) {
@@ -36,7 +38,7 @@ class TwigFunctions
         foreach ($columns as $column) {
             $filters = $column['filters'] ?? [];
             foreach ($filters as $filter) {
-                $type = Constants::DIC_FILTERS[$filter] ?? null;
+                $type = config(`press.crud.filters.$filter`) ?? null;
                 if ($type) {
                     $lines[] = "use $type;";
                 }

@@ -72,16 +72,6 @@ trait QueryRelationTrait
         $this->availableRelations = $availableRelations;
     }
 
-    protected function getColumnNames(): array
-    {
-        return Collection::make($this->availableColumns)->pluck('name')->toArray();
-    }
-
-    public function getRelationNames(): array
-    {
-        return Collection::make($this->availableRelations)->pluck('name')->toArray();
-    }
-
     /**
      * Validate relation loading data params
      *
@@ -96,5 +86,15 @@ trait QueryRelationTrait
             'relations' => ['array', 'nullable'],
             'relations.*' => ['string', Rule::in($this->getRelationNames())],
         ]);
+    }
+    
+    protected function getColumnNames(): array
+    {
+        return Collection::make($this->availableColumns)->pluck('name')->toArray();
+    }
+
+    public function getRelationNames(): array
+    {
+        return Collection::make($this->availableRelations)->pluck('name')->toArray();
     }
 }

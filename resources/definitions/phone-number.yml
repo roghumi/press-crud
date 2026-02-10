@@ -7,8 +7,6 @@ namespace: Roghumi\Press\Profiles\Resources\PhoneNumber
 timestamps: true
 softDeletes: true
 hasFactory: true
-ignoreFiles:
-  - resource
 
 verbs:
   - verb: Create

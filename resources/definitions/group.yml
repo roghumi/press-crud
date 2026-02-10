@@ -9,10 +9,6 @@ factory:
   namespace: Roghumi\Press\Crud\Database\Factories
   output: database/factories
 
-ignoreFiles:
-  - migrations
-  - resource
-
 verbs:
   - verb: create
     comp: CreateComposite

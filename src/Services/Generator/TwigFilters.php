@@ -132,18 +132,12 @@ class TwigFilters
         $lines = [];
 
         foreach ($relations as $relation) {
-            $types = Constants::DIC_RELATIONS[$relation['type']] ?? null;
+            $types = config($relation['type']);
             $name = $relation['name'];
             $type = class_basename($types[0] ?? null);
             $queryRelationType = class_basename($types[1] ?? null);
             $provider = $relation['provider'];
             $class = $relation['class'];
-            if ($provider === 'user.provider') {
-                $provider = "config('press.crud.user.provider')";
-            }
-            if ($class === 'user.class') {
-                $class = "config('press.crud.user.class')";
-            }
 
             $lines[] = "$queryRelationType::create('$name', $provider, \$request, ...\$args)";
         }
@@ -157,7 +151,7 @@ class TwigFilters
         foreach ($columns as $column) {
             $filters = $column['filters'] ?? [];
             foreach ($filters as $filter) {
-                $type = class_basename(Constants::DIC_FILTERS[$filter]);
+                $type = class_basename(config(`press.crud.filters.$filter`));
                 $name = $column['name'] . '.' . $filter;
                 $colName = $column['name'];
                 $lines[] = "$type::create('$name', '$colName')";
@@ -210,7 +204,7 @@ class TwigFilters
     }
     public static function relationClass(string $basename): string
     {
-        return Constants::DIC_CLASS[$basename] ?? self::ucFirst($basename);
+        return config($basename) ?? self::ucFirst($basename);
     }
     public static function fakerEval($faker)
     {
